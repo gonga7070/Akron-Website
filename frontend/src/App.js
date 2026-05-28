@@ -1066,7 +1066,7 @@ function ChatWidget() {
   const [messages, setMessages] = useState([
     {
       role: "assistant",
-      text: "Hi — I'm the Akron Digital assistant. Ask about pricing, packs, or how a site for your business would look.",
+      text: "Hey — I help out around here. What can I tell you about?",
     },
   ]);
   const [input, setInput] = useState("");
