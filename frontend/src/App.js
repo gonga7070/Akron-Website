@@ -164,7 +164,7 @@ function Hero() {
           <br />
           <span className="text-white/55">Built to be </span>
           <span className="italic font-medium">remembered</span>
-          <span className="text-[#2563EB]">.</span>
+          <span className="text-[#1E3A8A]">.</span>
         </h1>
 
         <div className="reveal reveal-delay-3 mt-10 max-w-xl">
@@ -230,7 +230,7 @@ function Marquee() {
             className="flex items-center gap-12 px-6 font-display font-medium text-white/60 text-3xl md:text-5xl tracking-tight"
           >
             <span>{t}</span>
-            <span className="text-[#2563EB]">/</span>
+            <span className="text-[#1E3A8A]">/</span>
           </div>
         ))}
       </div>
@@ -296,7 +296,7 @@ function Portfolio() {
                       {item.category}
                     </div>
                   </div>
-                  <div className="w-12 h-12 md:w-14 md:h-14 border border-white/30 flex items-center justify-center group-hover:bg-[#2563EB] group-hover:border-[#2563EB] transition-all">
+                  <div className="w-12 h-12 md:w-14 md:h-14 border border-white/30 flex items-center justify-center group-hover:bg-[#1E3A8A] group-hover:border-[#1E3A8A] transition-all">
                     <svg
                       width="20"
                       height="20"
@@ -412,12 +412,12 @@ function Packs() {
               }`}
             >
               {p.highlighted && (
-                <div className="absolute -top-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#2563EB] to-transparent" />
+                <div className="absolute -top-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#1E3A8A] to-transparent" />
               )}
               <div className="flex items-center justify-between mb-8">
                 <div className="section-num">{p.tag}</div>
                 {p.highlighted && (
-                  <div className="px-2 py-1 text-[10px] tracking-widest font-mono uppercase border border-[#2563EB] text-[#60a5fa]">
+                  <div className="px-2 py-1 text-[10px] tracking-widest font-mono uppercase border border-[#1E3A8A] text-[#3b82f6]">
                     Popular
                   </div>
                 )}
@@ -444,7 +444,7 @@ function Packs() {
                     key={f}
                     className="flex items-start gap-3 text-white/85 font-body text-sm"
                   >
-                    <span className="mt-2 w-1.5 h-1.5 bg-[#2563EB] flex-shrink-0" />
+                    <span className="mt-2 w-1.5 h-1.5 bg-[#1E3A8A] flex-shrink-0" />
                     <span>{f}</span>
                   </li>
                 ))}
@@ -518,7 +518,7 @@ function Calculator() {
             <h2 className="font-display font-bold tracking-tighter text-5xl md:text-6xl leading-[0.95]">
               What a real <br />
               website is <br />
-              <span className="text-[#60a5fa]">worth.</span>
+              <span className="text-[#3b82f6]">worth.</span>
             </h2>
             <p className="text-white/60 mt-8 max-w-md font-body leading-relaxed">
               Plug in your numbers. See what a properly converting website could
@@ -591,7 +591,7 @@ function Calculator() {
 
               <div className="mt-8 flex items-center justify-between flex-wrap gap-4">
                 <div className="font-mono text-xs text-white/50">
-                  <span className="text-[#60a5fa]">●</span> Live calculation
+                  <span className="text-[#3b82f6]">●</span> Live calculation
                   <span className="blink ml-1">_</span>
                 </div>
                 <a
@@ -664,7 +664,7 @@ function Field({
         step={step}
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full mt-3 accent-[#2563EB] cursor-pointer"
+        className="w-full mt-3 accent-[#1E3A8A] cursor-pointer"
         aria-label={`${label} slider`}
       />
     </label>
@@ -677,7 +677,7 @@ function Stat({ label, value, accent, testid }) {
       <div className="section-num mb-2">{label}</div>
       <div
         className={`ticker font-display font-bold text-3xl md:text-4xl tracking-tight ${
-          accent ? "text-[#60a5fa]" : "text-white"
+          accent ? "text-[#3b82f6]" : "text-white"
         }`}
       >
         {value}
@@ -839,7 +839,7 @@ function Contact() {
           <h2 className="font-display font-bold tracking-tighter text-5xl md:text-7xl leading-[0.92]">
             Let's build <br />
             something <br />
-            <span className="text-[#60a5fa]">sharp.</span>
+            <span className="text-[#3b82f6]">sharp.</span>
           </h2>
 
           <div className="mt-12 space-y-6">
@@ -977,7 +977,7 @@ function Contact() {
               data-testid="contact-status"
               className={`font-mono text-xs ${
                 status.state === "success"
-                  ? "text-[#60a5fa]"
+                  ? "text-[#3b82f6]"
                   : status.state === "error"
                     ? "text-red-400"
                     : "text-white/50"
@@ -1150,12 +1150,12 @@ function ChatWidget() {
       {open && (
         <div
           data-testid="chat-panel"
-          className="chat-pop mb-3 w-[92vw] max-w-sm bg-[#08080a] border border-white/10 shadow-2xl shadow-[#2563EB]/10 flex flex-col"
+          className="chat-pop mb-3 w-[92vw] max-w-sm bg-[#08080a] border border-white/10 shadow-2xl shadow-[#1E3A8A]/10 flex flex-col"
           style={{ height: "min(560px, 75vh)" }}
         >
           <div className="flex items-center justify-between px-4 py-3 border-b border-white/10">
             <div className="flex items-center gap-3">
-              <span className="w-2 h-2 bg-[#2563EB] animate-pulse" />
+              <span className="w-2 h-2 bg-[#1E3A8A] animate-pulse" />
               <div>
                 <div className="font-display font-bold text-sm">
                   Akron Assistant
@@ -1189,7 +1189,7 @@ function ChatWidget() {
                 data-testid={`chat-msg-${m.role}`}
                 className={`max-w-[85%] px-3 py-2 text-sm font-body leading-relaxed ${
                   m.role === "user"
-                    ? "ml-auto bg-[#2563EB] text-white"
+                    ? "ml-auto bg-[#1E3A8A] text-white"
                     : "mr-auto bg-white/5 border border-white/10 text-white/90"
                 }`}
               >
@@ -1244,10 +1244,10 @@ function ChatWidget() {
       <button
         data-testid="chat-toggle"
         onClick={() => setOpen(!open)}
-        className="group relative w-16 h-16 bg-[#2563EB] flex items-center justify-center shadow-[0_0_48px_rgba(37,99,235,0.45)] hover:shadow-[0_0_72px_rgba(37,99,235,0.7)] transition-all"
+        className="group relative w-16 h-16 bg-[#1E3A8A] flex items-center justify-center shadow-[0_0_48px_rgba(30,58,138,0.55)] hover:shadow-[0_0_72px_rgba(30,58,138,0.8)] transition-all"
         aria-label="Open chat"
       >
-        <span className="absolute inset-0 bg-[#2563EB] animate-ping opacity-20" />
+        <span className="absolute inset-0 bg-[#1E3A8A] animate-ping opacity-20" />
         {open ? (
           <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
             <path

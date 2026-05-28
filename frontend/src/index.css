@@ -13,9 +13,9 @@
     --text: #ffffff;
     --text-dim: #a1a1aa;
     --text-faint: #52525b;
-    --blue: #2563eb;
-    --blue-deep: #1e3a8a;
-    --blue-glow: rgba(37, 99, 235, 0.35);
+    --blue: #1e3a8a;
+    --blue-deep: #172554;
+    --blue-glow: rgba(30, 58, 138, 0.45);
 }
 
 * {
@@ -111,7 +111,7 @@ body {
     background:
         radial-gradient(
             600px circle at var(--mx, 50%) var(--my, 0%),
-            rgba(37, 99, 235, 0.18),
+            rgba(30, 58, 138, 0.22),
             transparent 40%
         );
     pointer-events: none;
@@ -160,7 +160,7 @@ body {
         box-shadow 0.25s ease;
 }
 .btn-primary:hover {
-    background: #1d4ed8;
+    background: #1e40af;
     box-shadow: 0 0 32px var(--blue-glow);
     transform: translateY(-1px);
 }
@@ -235,7 +235,7 @@ body {
 }
 .akron-input:focus {
     outline: none;
-    border-color: var(--blue);
+    border-color: #1e3a8a;
     background: #0c0c12;
 }
 .akron-input::placeholder {
