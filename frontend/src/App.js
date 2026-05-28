@@ -1033,11 +1033,6 @@ function Footer() {
           </div>
         </div>
 
-        <div className="font-display font-black text-[18vw] md:text-[15vw] leading-[0.85] tracking-tighter text-white/95 select-none">
-          AKRON
-          <span className="text-white/15">DIGITAL.</span>
-        </div>
-
         <div className="flex items-center justify-between pt-10 mt-10 border-t border-white/10 text-white/40 text-xs font-mono">
           <div>© {new Date().getFullYear()} Akron Digital. All rights reserved.</div>
           <div>Crafted in the GTA</div>
