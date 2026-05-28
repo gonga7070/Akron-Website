@@ -1,0 +1,96 @@
+{
+  "theme": "dark",
+  "archetype": "4 (Swiss & High-Contrast - Dark Mode)",
+  "typography": {
+    "headings": "Cabinet Grotesk",
+    "body": "Satoshi",
+    "hierarchy_rules": "Large scale, tracking-tight for headers. Uppercase with tracking-widest for overlines. Never center text by default, use left alignment for strong editorial structure.",
+    "fonts_installation": "Import from Fontshare or Google Fonts. e.g., @import url('https://api.fontshare.com/v2/css?f[]=cabinet-grotesk@800,500,700,400,900&f[]=satoshi@900,700,500,400&display=swap');"
+  },
+  "colors": {
+    "background": "#050505",
+    "surface": "#111111",
+    "text_primary": "#FFFFFF",
+    "text_secondary": "#A1A1AA",
+    "accent_blue": "#2563EB",
+    "accent_blue_dark": "#1E3A8A",
+    "border": "#27272A",
+    "rules": "No purple, no teal. Pure grayscale with deep blue accents for CTAs and highlights. High contrast is mandatory."
+  },
+  "layout_and_spacing": {
+    "container": "max-w-7xl mx-auto px-6",
+    "section_spacing": "py-24 md:py-32",
+    "grid_system": "Bento grids for pricing/services, wide asymmetry for portfolio. Generous spacing (gap-12 to gap-24).",
+    "border_radius": "Sharp edges (rounded-none) or very minimal (rounded-sm) to keep it brutalist/sleek."
+  },
+  "sections": [
+    {
+      "name": "Header",
+      "style": "Glassmorphism dark (bg-black/60 backdrop-blur-xl), border-b border-white/10. Sticky top z-50. Minimalist logo, 3-5 links, primary CTA in dark blue."
+    },
+    {
+      "name": "Hero",
+      "style": "Full height min-h-screen, custom generated background with overlay (bg-black/50 to bg-black/80 gradient). Huge typography quote ('Designed in silence. Built to be remembered.' or similar catchy quote) left-aligned with extreme negative space."
+    },
+    {
+      "name": "Portfolio",
+      "style": "Numbered sections (01 / Selected Work, 02 / Selected Work) imitating the reference site. Large mockup images with hover effects. 3 placeholder website cards (links empty)."
+    },
+    {
+      "name": "Services / Website Packs",
+      "style": "3-column bento grid. Grid Borders (The Technical Look). Packages: Standard ($299), Premium ($799), Monthly Subscription ($75). Use subtle dark blue accent on the Monthly Subscription card (e.g., border-blue-900 or dark blue glow)."
+    },
+    {
+      "name": "Conversion Rate Calculator",
+      "style": "Interactive tool. Inputs: monthly visitors (500), conversion rate (5%), average job price ($10,000 editable). Outputs: projected revenue/ROI. Styled like a sleek terminal or dark minimalist card with a glowing blue trace border."
+    },
+    {
+      "name": "About / Why Akron",
+      "style": "Text-heavy, large typography. High contrast Swiss style. Explaining web design for service-based businesses."
+    },
+    {
+      "name": "Contact Form",
+      "style": "Minimalist form. Fields: Name, Email, Phone, Message. Shadcn inputs with border-white/10 and sharp edges. Dark blue submit button."
+    },
+    {
+      "name": "Footer",
+      "style": "Massive typography for 'Akron Digital'. Contact info clearly displayed: 647-745-5082, Goncalo@akrondigital.com, GTA Ontario."
+    },
+    {
+      "name": "AI Assistant Chatbot Widget",
+      "style": "Floating bottom right. Circular or pill-shaped blue accent button. Persistent across the page."
+    }
+  ],
+  "components_needed": [
+    "lucide-react (icons)",
+    "shadcn/ui (Button, Input, Slider, Card, Form)"
+  ],
+  "image_urls": [
+    {
+      "category": "hero_background",
+      "url": "https://static.prod-images.emergentagent.com/jobs/0453ddb9-3c51-424b-84d2-04ec7caf3ec6/images/27633724d7af2f3ddfae519d9ebf462fa528fa1f6f7bb2080587559bcafb6dbb.png",
+      "description": "Dark geometric architectural background for hero section."
+    },
+    {
+      "category": "portfolio_1",
+      "url": "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwzfHx3ZWIlMjBkZXNpZ24lMjBtb2NrdXAlMjBkYXJrfGVufDB8fHx8MTc4MDAxMDk0NHww&ixlib=rb-4.1.0&q=85",
+      "description": "Website Mockup 1 for Portfolio"
+    },
+    {
+      "category": "portfolio_2",
+      "url": "https://images.pexels.com/photos/6625655/pexels-photo-6625655.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
+      "description": "Website Mockup 2 for Portfolio"
+    },
+    {
+      "category": "portfolio_3",
+      "url": "https://images.unsplash.com/photo-1707836885254-79b6e3d7b18d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXNpZ24lMjBtb2NrdXAlMjBkYXJrfGVufDB8fHx8MTc4MDAxMDk0NHww&ixlib=rb-4.1.0&q=85",
+      "description": "Website Mockup 3 for Portfolio"
+    },
+    {
+      "category": "about_office",
+      "url": "https://images.unsplash.com/photo-1615803697515-3cb782c2a65a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2OTF8MHwxfHNlYXJjaHwxfHxtaW5pbWFsaXN0JTIwb2ZmaWNlJTIwZGFya3xlbnwwfHx8fDE3ODAwMTA5NDR8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Minimalist dark office for About section"
+    }
+  ],
+  "instructions_to_main_agent": "Implement a dark, minimalist, high-contrast marketing site. Use pure blacks and dark grays with deep blue accents. AVOID purple/teal. Use large typography (Cabinet Grotesk) and sharp edges. Structure portfolio items with numbering like '01 / Selected Work' and massive typography. Build a functional conversion rate calculator section. Ensure you implement the specific contact information in the footer. Use the provided image URLs exactly. Add data-testid attributes to all interactive elements."
+}
