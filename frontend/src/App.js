@@ -455,6 +455,11 @@ function Packs() {
                 onClick={() => {
                   try {
                     sessionStorage.setItem("akron_selected_pack", p.name);
+                    window.dispatchEvent(
+                      new CustomEvent("akron:pack-selected", {
+                        detail: p.name,
+                      }),
+                    );
                   } catch (e) {
                     /* noop */
                   }
@@ -767,6 +772,12 @@ function Contact() {
     } catch (e) {
       /* noop */
     }
+    const onPick = (e) => {
+      const name = e?.detail || "";
+      if (name) setForm((f) => ({ ...f, package: name }));
+    };
+    window.addEventListener("akron:pack-selected", onPick);
+    return () => window.removeEventListener("akron:pack-selected", onPick);
   }, []);
 
   const submit = async (e) => {
@@ -1102,7 +1113,7 @@ function ChatWidget() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-[60]">
+    <div className="fixed bottom-20 right-6 z-[60]">
       {open && (
         <div
           data-testid="chat-panel"
