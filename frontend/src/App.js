@@ -261,15 +261,15 @@ function Portfolio() {
           </p>
         </div>
 
-        <div className="space-y-12 md:space-y-20">
+        <div className="space-y-12 md:space-y-16">
           {PORTFOLIO.map((item, idx) => (
             <a
               key={item.num}
               data-testid={`portfolio-item-${item.num}`}
               href="#"
               onClick={(e) => e.preventDefault()}
-              className={`group block relative ${
-                idx % 2 === 0 ? "md:pr-24" : "md:pl-24"
+              className={`group block relative max-w-3xl ${
+                idx % 2 === 0 ? "mr-auto" : "ml-auto"
               }`}
             >
               <div className="relative overflow-hidden border border-white/10 tilt aspect-[16/10] bg-[#0a0a0d]">
