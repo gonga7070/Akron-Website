@@ -45,7 +45,7 @@ class ContactRequest(BaseModel):
     name: str
     email: EmailStr
     phone: Optional[str] = ""
-    message: str
+    message: Optional[str] = ""
     package: Optional[str] = ""
     business_name: Optional[str] = ""
     has_website: Optional[str] = ""
@@ -149,7 +149,7 @@ async def submit_contact(payload: ContactRequest):
         name=payload.name.strip(),
         email=payload.email,
         phone=(payload.phone or "").strip(),
-        message=payload.message.strip(),
+        message=(payload.message or "").strip(),
         package=(payload.package or "").strip(),
         business_name=(payload.business_name or "").strip(),
         has_website=(payload.has_website or "").strip(),

@@ -784,10 +784,10 @@ function Contact() {
 
   const submit = async (e) => {
     e.preventDefault();
-    if (!form.name || !form.email || !form.message) {
+    if (!form.name || !form.email) {
       setStatus({
         state: "error",
-        msg: "Please fill name, email and message.",
+        msg: "Please fill name and email.",
       });
       return;
     }
@@ -962,7 +962,7 @@ function Contact() {
             </div>
           </div>
           <div>
-            <div className="section-num mb-3">Message</div>
+            <div className="section-num mb-3">Message (optional)</div>
             <textarea
               data-testid="contact-message"
               rows={6}
