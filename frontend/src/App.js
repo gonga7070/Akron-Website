@@ -56,20 +56,17 @@ function Header() {
           : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-6 lg:px-10 h-24 flex items-center justify-between">
         <a
           href="#top"
           data-testid="brand-link"
-          className="flex items-center gap-2 group"
+          className="flex items-center group"
         >
           <img
             src="https://customer-assets.emergentagent.com/job_akron-digital/artifacts/i47kudt6_Akron%20Digital%20Logo.png"
             alt="Akron"
-            className="h-12 md:h-14 w-auto object-contain"
+            className="h-20 md:h-24 w-auto object-contain"
           />
-          <span className="font-display font-bold tracking-tight text-lg -ml-1 text-white/80 group-hover:text-white transition-colors">
-            Digital
-          </span>
         </a>
 
         <nav className="hidden md:flex items-center gap-10">
