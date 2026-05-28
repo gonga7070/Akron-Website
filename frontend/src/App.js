@@ -60,13 +60,15 @@ function Header() {
         <a
           href="#top"
           data-testid="brand-link"
-          className="flex items-center gap-3 group"
+          className="flex items-center gap-2 group"
         >
-          <span className="w-8 h-8 border border-white/30 flex items-center justify-center font-display font-black text-sm group-hover:bg-white group-hover:text-black transition-colors">
-            A
-          </span>
-          <span className="font-display font-bold tracking-tight text-lg">
-            Akron Digital
+          <img
+            src="https://customer-assets.emergentagent.com/job_akron-digital/artifacts/i47kudt6_Akron%20Digital%20Logo.png"
+            alt="Akron"
+            className="h-12 md:h-14 w-auto object-contain"
+          />
+          <span className="font-display font-bold tracking-tight text-lg -ml-1 text-white/80 group-hover:text-white transition-colors">
+            Digital
           </span>
         </a>
 
