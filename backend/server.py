@@ -47,6 +47,8 @@ class ContactRequest(BaseModel):
     phone: Optional[str] = ""
     message: str
     package: Optional[str] = ""
+    business_name: Optional[str] = ""
+    has_website: Optional[str] = ""
 
 
 class ContactRecord(BaseModel):
@@ -56,6 +58,8 @@ class ContactRecord(BaseModel):
     phone: str = ""
     message: str
     package: str = ""
+    business_name: str = ""
+    has_website: str = ""
     email_sent: bool = False
     created_at: str = Field(default_factory=lambda: datetime.now(timezone.utc).isoformat())
 
@@ -91,12 +95,6 @@ Packages (only mention details if asked):
 - Monthly Care — $75/month. Updates, backups, security, AI chat, Google reviews, analytics, priority support.
 
 If asked "how long does it take", "do you do custom work", "what about hosting" etc — answer briefly and honestly, and if it's something only Goncalo should commit to, say so and share his contact.
-
-When someone asks about getting a website built / made / designed (or seems ready to start a project), naturally ask two things before going deep:
-1. What's the business name?
-2. Do you already have a website? (yes/no)
-
-Ask both casually in one short message, not as a stiff form. Once they answer, give a quick recommendation and point them to Goncalo or the contact form.
 """
 
 
@@ -113,6 +111,8 @@ async def send_contact_email(record: ContactRecord) -> bool:
             <p style="color:#a1a1aa;margin:0 0 24px 0">A new contact form was submitted on akrondigital.com</p>
             <table cellpadding="8" cellspacing="0" style="background:#111;border:1px solid #27272a;border-radius:6px;width:100%">
               <tr><td style="color:#a1a1aa;width:120px">Name</td><td style="color:#fff">{record.name}</td></tr>
+              <tr><td style="color:#a1a1aa">Business</td><td style="color:#fff">{record.business_name or '-'}</td></tr>
+              <tr><td style="color:#a1a1aa">Has Website</td><td style="color:#fff">{record.has_website or '-'}</td></tr>
               <tr><td style="color:#a1a1aa">Email</td><td style="color:#fff">{record.email}</td></tr>
               <tr><td style="color:#a1a1aa">Phone</td><td style="color:#fff">{record.phone or '-'}</td></tr>
               <tr><td style="color:#a1a1aa">Package</td><td style="color:#fff">{record.package or '-'}</td></tr>
@@ -151,6 +151,8 @@ async def submit_contact(payload: ContactRequest):
         phone=(payload.phone or "").strip(),
         message=payload.message.strip(),
         package=(payload.package or "").strip(),
+        business_name=(payload.business_name or "").strip(),
+        has_website=(payload.has_website or "").strip(),
     )
     sent = await send_contact_email(record)
     record.email_sent = sent

@@ -762,6 +762,8 @@ function Contact() {
     phone: "",
     message: "",
     package: "",
+    business_name: "",
+    has_website: "",
   });
   const [status, setStatus] = useState({ state: "idle", msg: "" });
 
@@ -803,6 +805,8 @@ function Contact() {
           phone: "",
           message: "",
           package: "",
+          business_name: "",
+          has_website: "",
         });
         try {
           sessionStorage.removeItem("akron_selected_pack");
@@ -894,6 +898,40 @@ function Contact() {
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
                 placeholder="you@business.com"
               />
+            </div>
+          </div>
+          <div className="grid sm:grid-cols-2 gap-5">
+            <div>
+              <div className="section-num mb-3">Business Name</div>
+              <input
+                data-testid="contact-business-input"
+                className="akron-input"
+                value={form.business_name}
+                onChange={(e) =>
+                  setForm({ ...form, business_name: e.target.value })
+                }
+                placeholder="e.g. Goncalo Landscaping"
+              />
+            </div>
+            <div>
+              <div className="section-num mb-3">Already Have a Website?</div>
+              <div className="flex gap-3">
+                {["Yes", "No"].map((opt) => (
+                  <button
+                    key={opt}
+                    type="button"
+                    data-testid={`contact-has-website-${opt.toLowerCase()}`}
+                    onClick={() => setForm({ ...form, has_website: opt })}
+                    className={`flex-1 px-5 py-[14px] text-sm font-medium tracking-wide border transition-all ${
+                      form.has_website === opt
+                        ? "btn-primary"
+                        : "bg-[#0a0a0d] border-white/10 text-white/70 hover:border-white/40 hover:text-white"
+                    }`}
+                  >
+                    {opt}
+                  </button>
+                ))}
+              </div>
             </div>
           </div>
           <div className="grid sm:grid-cols-2 gap-5">
