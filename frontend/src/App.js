@@ -543,7 +543,7 @@ function Calculator() {
                 testid="input-visitors"
               />
               <Field
-                label="Conversion Rate"
+                label="Conversion Rate · 2–5% avg"
                 value={conversion}
                 onChange={setConversion}
                 min={0.1}
