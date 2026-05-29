@@ -264,61 +264,82 @@ function Portfolio() {
 
         <div className="space-y-12 md:space-y-16">
           {PORTFOLIO.map((item, idx) => (
-            <a
+            <div
               key={item.num}
               data-testid={`portfolio-item-${item.num}`}
-              href={item.live ? item.href : "#"}
-              target={item.live ? "_blank" : undefined}
-              rel={item.live ? "noopener noreferrer" : undefined}
-              onClick={(e) => {
-                if (!item.live) e.preventDefault();
-              }}
-              className={`group block relative max-w-3xl ${
+              className={`group relative max-w-3xl ${
                 idx % 2 === 0 ? "mr-auto" : "ml-auto"
               }`}
             >
               <div className="relative overflow-hidden border border-white/10 tilt aspect-[16/10] bg-[#0a0a0d]">
-                <img
-                  src={item.img}
-                  alt={item.title}
-                  className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-90 group-hover:scale-[1.02] transition-all duration-700"
-                />
-                <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-black/20 to-transparent pointer-events-none" />
-                <div className="absolute top-6 left-6 right-6 flex items-start justify-between">
+                {item.live ? (
+                  <iframe
+                    title={item.title}
+                    src={item.href}
+                    loading="lazy"
+                    className="absolute inset-0 w-full h-full bg-black"
+                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+                  />
+                ) : (
+                  <>
+                    <img
+                      src={item.img}
+                      alt={item.title}
+                      className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-90 group-hover:scale-[1.02] transition-all duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-black/20 to-transparent pointer-events-none" />
+                  </>
+                )}
+
+                <div className="absolute top-0 inset-x-0 flex items-start justify-between px-4 py-3 bg-gradient-to-b from-black/80 to-transparent pointer-events-none">
                   <div className="section-num text-white/80">
                     {item.num} / Project
                   </div>
                   <div className="section-num text-white/60 hidden md:block">
-                    {item.live ? "Live Site →" : "Coming Soon"}
-                  </div>
-                </div>
-                <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
-                  <div>
-                    <div className="font-display font-bold text-3xl md:text-5xl tracking-tight">
-                      {item.title}
-                    </div>
-                    <div className="text-white/60 mt-1 text-sm md:text-base font-body">
-                      {item.category}
-                    </div>
-                  </div>
-                  <div className="w-12 h-12 md:w-14 md:h-14 border border-white/30 flex items-center justify-center group-hover:bg-[#1E3A8A] group-hover:border-[#1E3A8A] transition-all">
-                    <svg
-                      width="20"
-                      height="20"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      className="group-hover:translate-x-1 transition-transform"
-                    >
-                      <path
-                        d="M5 12H19M19 12L12 5M19 12L12 19"
-                        stroke="currentColor"
-                        strokeWidth="1.5"
-                      />
-                    </svg>
+                    {item.live ? "Live Preview" : "Coming Soon"}
                   </div>
                 </div>
               </div>
-            </a>
+
+              <div className="flex items-end justify-between mt-5">
+                <div>
+                  <div className="font-display font-bold text-2xl md:text-3xl tracking-tight">
+                    {item.title}
+                  </div>
+                  <div className="text-white/55 mt-1 text-sm font-body">
+                    {item.category}
+                  </div>
+                </div>
+                {item.live ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    data-testid={`portfolio-open-${item.num}`}
+                    className="group/cta inline-flex items-center gap-3 text-sm tracking-wide font-medium px-5 py-3 border border-white/20 hover:border-[#3b82f6] hover:text-[#3b82f6] transition-colors"
+                  >
+                    Open Site
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      className="group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5 transition-transform"
+                    >
+                      <path
+                        d="M7 17L17 7M17 7H8M17 7V16"
+                        stroke="currentColor"
+                        strokeWidth="1.6"
+                      />
+                    </svg>
+                  </a>
+                ) : (
+                  <div className="text-xs font-mono text-white/40 tracking-widest uppercase">
+                    Coming Soon
+                  </div>
+                )}
+              </div>
+            </div>
           ))}
         </div>
       </div>
