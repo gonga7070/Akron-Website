@@ -269,7 +269,7 @@ function Portfolio() {
               data-testid={`portfolio-item-${item.num}`}
               className={`group relative ${
                 idx % 2 === 0 ? "mr-auto" : "ml-auto"
-              } max-w-3xl`}
+              } max-w-4xl`}
             >
               <PortfolioFrame item={item} />
 
@@ -373,12 +373,14 @@ function PortfolioFrame({ item }) {
         </div>
       )}
 
-      <div className="absolute top-0 inset-x-0 flex items-start justify-between px-4 py-3 bg-gradient-to-b from-black/80 to-transparent pointer-events-none z-10">
-        <div className="section-num text-white/80">{item.num} / Project</div>
-        <div className="section-num text-white/60 hidden md:block">
-          {item.live ? "Live Preview · 1440×900" : "Coming Soon"}
+      {!item.live && (
+        <div className="absolute top-0 inset-x-0 flex items-start justify-between px-4 py-3 bg-gradient-to-b from-black/80 to-transparent pointer-events-none z-10">
+          <div className="section-num text-white/80">{item.num} / Project</div>
+          <div className="section-num text-white/60 hidden md:block">
+            Coming Soon
+          </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
