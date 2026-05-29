@@ -539,7 +539,7 @@ function Calculator() {
                 min={10}
                 max={50000}
                 step={10}
-                suffix="people"
+                suffix="visitors"
                 testid="input-visitors"
               />
               <Field
