@@ -10,8 +10,8 @@ const HERO_BG =
 const PORTFOLIO = [
   {
     num: "01",
-    title: "Lumen & Co.",
-    category: "Renovation Studio",
+    title: "SkyForge Roofing",
+    category: "Commercial Roofing · GTA",
     img: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwzfHx3ZWIlMjBkZXNpZ24lMjBtb2NrdXAlMjBkYXJrfGVufDB8fHx8MTc4MDAxMDk0NHww&ixlib=rb-4.1.0&q=85",
     href: "/skyforge/",
     live: true,
