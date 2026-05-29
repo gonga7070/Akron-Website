@@ -13,6 +13,8 @@ const PORTFOLIO = [
     title: "Lumen & Co.",
     category: "Renovation Studio",
     img: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwzfHx3ZWIlMjBkZXNpZ24lMjBtb2NrdXAlMjBkYXJrfGVufDB8fHx8MTc4MDAxMDk0NHww&ixlib=rb-4.1.0&q=85",
+    href: "/skyforge/",
+    live: true,
   },
   {
     num: "02",
@@ -265,8 +267,12 @@ function Portfolio() {
             <a
               key={item.num}
               data-testid={`portfolio-item-${item.num}`}
-              href="#"
-              onClick={(e) => e.preventDefault()}
+              href={item.live ? item.href : "#"}
+              target={item.live ? "_blank" : undefined}
+              rel={item.live ? "noopener noreferrer" : undefined}
+              onClick={(e) => {
+                if (!item.live) e.preventDefault();
+              }}
               className={`group block relative max-w-3xl ${
                 idx % 2 === 0 ? "mr-auto" : "ml-auto"
               }`}
@@ -283,7 +289,7 @@ function Portfolio() {
                     {item.num} / Project
                   </div>
                   <div className="section-num text-white/60 hidden md:block">
-                    Coming Soon
+                    {item.live ? "Live Site →" : "Coming Soon"}
                   </div>
                 </div>
                 <div className="absolute bottom-6 left-6 right-6 flex items-end justify-between">
