@@ -374,14 +374,7 @@ function PortfolioFrame({ item }) {
               className="absolute inset-0 z-10 flex items-center justify-center bg-black/0 hover:bg-black/30 transition-colors group/click"
               aria-label="Click to interact with live preview"
             >
-              <span className="inline-flex items-center gap-2 px-4 py-2 bg-black/70 backdrop-blur-md border border-white/20 text-white text-xs font-mono tracking-widest uppercase opacity-0 group-hover/click:opacity-100 transition-opacity">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
-                  <path
-                    d="M9 3v18M3 9h18"
-                    stroke="currentColor"
-                    strokeWidth="1.5"
-                  />
-                </svg>
+              <span className="inline-flex items-center px-4 py-2 bg-black/70 backdrop-blur-md border border-white/20 text-white text-xs font-mono tracking-widest uppercase opacity-0 group-hover/click:opacity-100 transition-opacity">
                 Click to scroll
               </span>
             </button>
