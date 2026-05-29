@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/skyforge/static/css/main.09c6c78f.css",
-    "main.js": "/skyforge/static/js/main.396e75d6.js",
+    "main.css": "/skyforge/static/css/main.4c1d8490.css",
+    "main.js": "/skyforge/static/js/main.6161b22c.js",
     "index.html": "/skyforge/index.html",
-    "main.09c6c78f.css.map": "/skyforge/static/css/main.09c6c78f.css.map",
-    "main.396e75d6.js.map": "/skyforge/static/js/main.396e75d6.js.map"
+    "main.4c1d8490.css.map": "/skyforge/static/css/main.4c1d8490.css.map",
+    "main.6161b22c.js.map": "/skyforge/static/js/main.6161b22c.js.map"
   },
   "entrypoints": [
-    "static/css/main.09c6c78f.css",
-    "static/js/main.396e75d6.js"
+    "static/css/main.4c1d8490.css",
+    "static/js/main.6161b22c.js"
   ]
 }
