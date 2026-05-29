@@ -262,44 +262,16 @@ function Portfolio() {
           </p>
         </div>
 
-        <div className="space-y-12 md:space-y-16">
+        <div className="space-y-16 md:space-y-24">
           {PORTFOLIO.map((item, idx) => (
             <div
               key={item.num}
               data-testid={`portfolio-item-${item.num}`}
-              className={`group relative max-w-3xl ${
+              className={`group relative ${
                 idx % 2 === 0 ? "mr-auto" : "ml-auto"
-              }`}
+              } max-w-5xl`}
             >
-              <div className="relative overflow-hidden border border-white/10 tilt aspect-[16/10] bg-[#0a0a0d]">
-                {item.live ? (
-                  <iframe
-                    title={item.title}
-                    src={item.href}
-                    loading="lazy"
-                    className="absolute inset-0 w-full h-full bg-black"
-                    sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-                  />
-                ) : (
-                  <>
-                    <img
-                      src={item.img}
-                      alt={item.title}
-                      className="absolute inset-0 w-full h-full object-cover opacity-60 group-hover:opacity-90 group-hover:scale-[1.02] transition-all duration-700"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-black/20 to-transparent pointer-events-none" />
-                  </>
-                )}
-
-                <div className="absolute top-0 inset-x-0 flex items-start justify-between px-4 py-3 bg-gradient-to-b from-black/80 to-transparent pointer-events-none">
-                  <div className="section-num text-white/80">
-                    {item.num} / Project
-                  </div>
-                  <div className="section-num text-white/60 hidden md:block">
-                    {item.live ? "Live Preview" : "Coming Soon"}
-                  </div>
-                </div>
-              </div>
+              <PortfolioFrame item={item} />
 
               <div className="flex items-end justify-between mt-5">
                 <div>
@@ -347,6 +319,69 @@ function Portfolio() {
   );
 }
 
+function PortfolioFrame({ item }) {
+  const wrapRef = useRef(null);
+  const DEVICE_W = 1440;
+  const DEVICE_H = 900;
+
+  useEffect(() => {
+    if (!wrapRef.current) return;
+    const el = wrapRef.current;
+    const apply = () => {
+      const w = el.clientWidth;
+      const s = w / DEVICE_W;
+      el.style.setProperty("--frame-scale", s);
+      el.style.height = `${DEVICE_H * s}px`;
+    };
+    apply();
+    const ro = new ResizeObserver(apply);
+    ro.observe(el);
+    window.addEventListener("resize", apply);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", apply);
+    };
+  }, []);
+
+  return (
+    <div
+      ref={wrapRef}
+      className="relative overflow-hidden border border-white/10 tilt bg-[#0a0a0d] w-full"
+    >
+      {item.live ? (
+        <iframe
+          title={item.title}
+          src={item.href}
+          loading="lazy"
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+          style={{
+            width: `${DEVICE_W}px`,
+            height: `${DEVICE_H}px`,
+            transform: "scale(var(--frame-scale, 1))",
+            transformOrigin: "top left",
+          }}
+          className="absolute top-0 left-0 bg-black border-0"
+        />
+      ) : (
+        <div className="aspect-[16/10] relative">
+          <img
+            src={item.img}
+            alt={item.title}
+            className="absolute inset-0 w-full h-full object-cover opacity-60"
+          />
+          <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-black/20 to-transparent pointer-events-none" />
+        </div>
+      )}
+
+      <div className="absolute top-0 inset-x-0 flex items-start justify-between px-4 py-3 bg-gradient-to-b from-black/80 to-transparent pointer-events-none z-10">
+        <div className="section-num text-white/80">{item.num} / Project</div>
+        <div className="section-num text-white/60 hidden md:block">
+          {item.live ? "Live Preview · 1440×900" : "Coming Soon"}
+        </div>
+      </div>
+    </div>
+  );
+}
 /* ============ WEBSITE PACKS ============ */
 function Packs() {
   const packs = [
