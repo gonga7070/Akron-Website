@@ -801,29 +801,60 @@ function Contact() {
     // Save lead silently in DB (best effort)
     axios.post(`${API}/contact`, form).catch(() => {});
 
-    // Build a clean, organized email and open the visitor's mail client
-    const subject = `Website Form — ${form.business_name || form.name}`;
-    const lines = [
-      "AKRON DIGITAL — WEBSITE FORM",
-      "================================",
+    // Build a genuine, human-sounding email body
+    const sentences = [];
+    const firstName = (form.name || "").trim().split(/\s+/)[0] || form.name;
+
+    let intro = `My name is ${form.name}`;
+    if (form.business_name) intro += ` and I run ${form.business_name}`;
+    intro += ".";
+    sentences.push(intro);
+
+    if (form.has_website === "Yes") {
+      sentences.push("I already have a website but I'm looking to redo it.");
+    } else if (form.has_website === "No") {
+      sentences.push("I don't have a website yet and I'm looking to get one built.");
+    }
+
+    if (form.package) {
+      if (form.package === "Not sure yet") {
+        sentences.push("I'm not sure yet which package fits best — would love your advice.");
+      } else {
+        sentences.push(`I'm interested in your ${form.package} package.`);
+      }
+    }
+
+    let openingPara = sentences.join(" ");
+
+    const messagePara = form.message ? form.message.trim() : "";
+
+    const contactBits = [];
+    contactBits.push(`Email: ${form.email}`);
+    if (form.phone) contactBits.push(`Phone: ${form.phone}`);
+
+    const bodyLines = [
+      "Hi Akron Digital,",
       "",
-      `Name:                  ${form.name}`,
-      `Business:              ${form.business_name || "-"}`,
-      `Already has a website: ${form.has_website || "-"}`,
-      `Email:                 ${form.email}`,
-      `Phone:                 ${form.phone || "-"}`,
-      `Interested in:         ${form.package || "-"}`,
-      "",
-      "--------------------------------",
-      "Message:",
-      form.message ? form.message : "(none)",
-      "",
-      "--------------------------------",
-      "Sent from akrondigital.com",
+      openingPara,
     ];
-    const body = lines.join("\n");
+    if (messagePara) {
+      bodyLines.push("", messagePara);
+    }
+    bodyLines.push(
+      "",
+      "Looking forward to hearing from you.",
+      "",
+      "Thanks,",
+      firstName,
+      "",
+      ...contactBits,
+    );
+
+    const body = bodyLines.join("\n");
+
+    const subject = `Website Form — ${form.business_name || form.name}`;
     const mailto =
-      `https://mail.google.com/mail/?view=cm&fs=1` +
+      `https://mail.google.com/mail/?view=cm` +
       `&to=${encodeURIComponent("Goncaloc007@gmail.com")}` +
       `&su=${encodeURIComponent(subject)}` +
       `&body=${encodeURIComponent(body)}`;
