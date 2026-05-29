@@ -321,6 +321,7 @@ function Portfolio() {
 
 function PortfolioFrame({ item }) {
   const wrapRef = useRef(null);
+  const [active, setActive] = useState(false);
   const DEVICE_W = 1440;
   const DEVICE_H = 900;
 
@@ -346,22 +347,46 @@ function PortfolioFrame({ item }) {
   return (
     <div
       ref={wrapRef}
+      onMouseLeave={() => setActive(false)}
       className="relative overflow-hidden border border-white/10 tilt bg-[#0a0a0d] w-full"
     >
       {item.live ? (
-        <iframe
-          title={item.title}
-          src={item.href}
-          loading="lazy"
-          sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-          style={{
-            width: `${DEVICE_W}px`,
-            height: `${DEVICE_H}px`,
-            transform: "scale(var(--frame-scale, 1))",
-            transformOrigin: "top left",
-          }}
-          className="absolute top-0 left-0 bg-black border-0"
-        />
+        <>
+          <iframe
+            title={item.title}
+            src={item.href}
+            loading="lazy"
+            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+            style={{
+              width: `${DEVICE_W}px`,
+              height: `${DEVICE_H}px`,
+              transform: "scale(var(--frame-scale, 1))",
+              transformOrigin: "top left",
+              pointerEvents: active ? "auto" : "none",
+            }}
+            className="absolute top-0 left-0 bg-black border-0"
+          />
+          {!active && (
+            <button
+              type="button"
+              onClick={() => setActive(true)}
+              data-testid={`portfolio-activate-${item.num}`}
+              className="absolute inset-0 z-10 flex items-center justify-center bg-black/0 hover:bg-black/30 transition-colors group/click"
+              aria-label="Click to interact with live preview"
+            >
+              <span className="inline-flex items-center gap-2 px-4 py-2 bg-black/70 backdrop-blur-md border border-white/20 text-white text-xs font-mono tracking-widest uppercase opacity-0 group-hover/click:opacity-100 transition-opacity">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path
+                    d="M9 3v18M3 9h18"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                  />
+                </svg>
+                Click to scroll
+              </span>
+            </button>
+          )}
+        </>
       ) : (
         <div className="aspect-[16/10] relative">
           <img
