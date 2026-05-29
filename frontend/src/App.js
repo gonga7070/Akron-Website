@@ -269,7 +269,7 @@ function Portfolio() {
               data-testid={`portfolio-item-${item.num}`}
               className={`group relative ${
                 idx % 2 === 0 ? "mr-auto" : "ml-auto"
-              } max-w-4xl`}
+              } max-w-2xl`}
             >
               <PortfolioFrame item={item} />
 
