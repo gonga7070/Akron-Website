@@ -104,29 +104,49 @@ async def send_contact_email(record: ContactRecord) -> bool:
         logger.info("RESEND_API_KEY not set — skipping email send. Stored in DB.")
         return False
     try:
+        rows = [
+            ("Name", record.name or "-"),
+            ("Business", record.business_name or "-"),
+            ("Already has a website", record.has_website or "-"),
+            ("Email", record.email or "-"),
+            ("Phone", record.phone or "-"),
+            ("Interested in", record.package or "-"),
+        ]
+        row_html = "".join(
+            f"""<tr>
+              <td style="padding:14px 18px;color:#6b7280;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;width:200px;border-bottom:1px solid #1f2937;vertical-align:top">{label}</td>
+              <td style="padding:14px 18px;color:#f9fafb;font-size:15px;border-bottom:1px solid #1f2937">{val}</td>
+            </tr>"""
+            for label, val in rows
+        )
+        message_block = (
+            f"""<div style="margin-top:28px">
+              <div style="color:#6b7280;font-size:12px;letter-spacing:0.08em;text-transform:uppercase;margin-bottom:10px">Message</div>
+              <div style="color:#f9fafb;font-size:15px;line-height:1.6;white-space:pre-wrap;background:#0a0a0a;padding:18px;border:1px solid #1f2937;border-radius:4px">{record.message}</div>
+            </div>"""
+            if record.message
+            else ""
+        )
+        subject_label = record.business_name or record.name or "New lead"
         html = f"""
-        <table width="100%" cellpadding="0" cellspacing="0" style="font-family:Arial,sans-serif;background:#0a0a0a;color:#fff;padding:24px">
-          <tr><td>
-            <h2 style="margin:0 0 16px 0;color:#fff;font-size:22px">New lead — Akron Digital</h2>
-            <p style="color:#a1a1aa;margin:0 0 24px 0">A new contact form was submitted on akrondigital.com</p>
-            <table cellpadding="8" cellspacing="0" style="background:#111;border:1px solid #27272a;border-radius:6px;width:100%">
-              <tr><td style="color:#a1a1aa;width:120px">Name</td><td style="color:#fff">{record.name}</td></tr>
-              <tr><td style="color:#a1a1aa">Business</td><td style="color:#fff">{record.business_name or '-'}</td></tr>
-              <tr><td style="color:#a1a1aa">Has Website</td><td style="color:#fff">{record.has_website or '-'}</td></tr>
-              <tr><td style="color:#a1a1aa">Email</td><td style="color:#fff">{record.email}</td></tr>
-              <tr><td style="color:#a1a1aa">Phone</td><td style="color:#fff">{record.phone or '-'}</td></tr>
-              <tr><td style="color:#a1a1aa">Package</td><td style="color:#fff">{record.package or '-'}</td></tr>
-              <tr><td style="color:#a1a1aa;vertical-align:top">Message</td><td style="color:#fff;white-space:pre-wrap">{record.message}</td></tr>
-            </table>
-            <p style="color:#52525b;margin-top:24px;font-size:12px">Submitted {record.created_at}</p>
-          </td></tr>
-        </table>
+        <div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif;background:#050505;padding:32px;color:#fff;max-width:640px;margin:0 auto">
+          <div style="font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:#3b82f6;margin-bottom:8px">Akron Digital · Website Form</div>
+          <h1 style="font-size:26px;font-weight:700;margin:0 0 6px 0;color:#fff">New project enquiry</h1>
+          <div style="color:#9ca3af;font-size:14px;margin-bottom:28px">{subject_label}</div>
+          <table cellpadding="0" cellspacing="0" style="width:100%;background:#0c0c0d;border:1px solid #1f2937;border-radius:4px;border-collapse:collapse">
+            {row_html}
+          </table>
+          {message_block}
+          <div style="margin-top:32px;padding-top:20px;border-top:1px solid #1f2937;color:#52525b;font-size:12px">
+            Submitted {record.created_at} · Reply directly to this email to contact {record.name}.
+          </div>
+        </div>
         """
         params = {
             "from": SENDER_EMAIL,
             "to": [NOTIFICATION_EMAIL],
             "reply_to": record.email,
-            "subject": f"New Akron Digital lead — {record.name}",
+            "subject": f"Website Form — {subject_label}",
             "html": html,
         }
         result = await asyncio.to_thread(resend.Emails.send, params)
