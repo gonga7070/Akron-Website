@@ -618,7 +618,6 @@ function Field({
   step,
   prefix,
   suffix,
-  decimals = 0,
   testid,
 }) {
   const handle = (e) => {
@@ -635,7 +634,7 @@ function Field({
       <div className="section-num mb-3">{label}</div>
       <div className="relative flex items-center">
         {prefix && (
-          <span className="absolute left-4 text-white/50 font-mono">
+          <span className="absolute left-4 top-1/2 -translate-y-1/2 text-white/50 font-display text-2xl pointer-events-none">
             {prefix}
           </span>
         )}
@@ -648,24 +647,18 @@ function Field({
           step={step}
           value={value}
           onChange={handle}
-          className={`akron-input font-display text-2xl ${prefix ? "pl-8" : ""} ${suffix ? "pr-20" : ""}`}
+          style={{
+            paddingLeft: prefix ? "44px" : undefined,
+            paddingRight: suffix ? "80px" : undefined,
+          }}
+          className="akron-input font-display text-2xl"
         />
         {suffix && (
-          <span className="absolute right-4 text-white/50 font-mono text-xs uppercase tracking-widest">
+          <span className="absolute right-4 top-1/2 -translate-y-1/2 text-white/50 font-mono text-xs uppercase tracking-widest pointer-events-none">
             {suffix}
           </span>
         )}
       </div>
-      <input
-        type="range"
-        min={min}
-        max={max}
-        step={step}
-        value={value}
-        onChange={(e) => onChange(Number(e.target.value))}
-        className="w-full mt-3 accent-[#1E3A8A] cursor-pointer"
-        aria-label={`${label} slider`}
-      />
     </label>
   );
 }
