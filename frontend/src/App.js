@@ -796,40 +796,58 @@ function Contact() {
       });
       return;
     }
-    setStatus({ state: "loading", msg: "Sending..." });
-    try {
-      const res = await axios.post(`${API}/contact`, form);
-      if (res.data?.status === "ok") {
-        setStatus({
-          state: "success",
-          msg: "Thanks. We'll be in touch within 24 hours.",
-        });
-        setForm({
-          name: "",
-          email: "",
-          phone: "",
-          message: "",
-          package: "",
-          business_name: "",
-          has_website: "",
-        });
-        try {
-          sessionStorage.removeItem("akron_selected_pack");
-        } catch (e) {
-          /* noop */
-        }
-      } else {
-        setStatus({
-          state: "error",
-          msg: "Something went wrong. Please try again.",
-        });
-      }
-    } catch (err) {
+    setStatus({ state: "loading", msg: "Opening your email..." });
+
+    // Save lead silently in DB (best effort)
+    axios.post(`${API}/contact`, form).catch(() => {});
+
+    // Build a clean, organized email and open the visitor's mail client
+    const subject = `Website Form — ${form.business_name || form.name}`;
+    const lines = [
+      "AKRON DIGITAL — WEBSITE FORM",
+      "================================",
+      "",
+      `Name:                  ${form.name}`,
+      `Business:              ${form.business_name || "-"}`,
+      `Already has a website: ${form.has_website || "-"}`,
+      `Email:                 ${form.email}`,
+      `Phone:                 ${form.phone || "-"}`,
+      `Interested in:         ${form.package || "-"}`,
+      "",
+      "--------------------------------",
+      "Message:",
+      form.message ? form.message : "(none)",
+      "",
+      "--------------------------------",
+      "Sent from akrondigital.com",
+    ];
+    const body = lines.join("\n");
+    const mailto = `mailto:Goncaloc007@gmail.com?subject=${encodeURIComponent(
+      subject,
+    )}&body=${encodeURIComponent(body)}`;
+
+    window.location.href = mailto;
+
+    setTimeout(() => {
       setStatus({
-        state: "error",
-        msg: "Network error. Please email Goncalo@akrondigital.com.",
+        state: "success",
+        msg: "Your email app should open with the form ready to send.",
       });
-    }
+      setForm({
+        name: "",
+        email: "",
+        phone: "",
+        message: "",
+        package: "",
+        business_name: "",
+        has_website: "",
+      });
+      try {
+        sessionStorage.removeItem("akron_selected_pack");
+      } catch (e) {
+        /* noop */
+      }
+    }, 600);
   };
 
   return (
@@ -988,7 +1006,7 @@ function Contact() {
                     : "text-white/50"
               }`}
             >
-              {status.msg || "We reply within 24 hours."}
+              {status.msg || "Opens your email app pre-filled. You hit send."}
             </div>
             <button
               data-testid="contact-submit"
@@ -996,7 +1014,7 @@ function Contact() {
               disabled={status.state === "loading"}
               className="btn-primary px-8 py-4 text-sm font-medium tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {status.state === "loading" ? "Sending..." : "Send Message"}
+              {status.state === "loading" ? "Opening..." : "Send Message"}
             </button>
           </div>
         </form>
