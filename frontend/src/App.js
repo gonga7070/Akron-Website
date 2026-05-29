@@ -620,8 +620,18 @@ function Field({
   suffix,
   testid,
 }) {
+  const [raw, setRaw] = useState(String(value));
+
+  useEffect(() => {
+    // sync from parent only if it actually differs from the parsed buffer
+    const parsed = raw === "" ? 0 : Number(raw);
+    if (parsed !== value) setRaw(String(value));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [value]);
+
   const handle = (e) => {
     const v = e.target.value;
+    setRaw(v);
     if (v === "" || v === "-") {
       onChange(0);
       return;
@@ -629,6 +639,11 @@ function Field({
     const num = Number(v);
     if (!Number.isNaN(num)) onChange(num);
   };
+
+  const handleBlur = () => {
+    if (raw === "" || raw === "-") setRaw("0");
+  };
+
   return (
     <label className="block">
       <div className="section-num mb-3">{label}</div>
@@ -640,13 +655,11 @@ function Field({
         )}
         <input
           data-testid={testid}
-          type="number"
+          type="text"
           inputMode="decimal"
-          min={min}
-          max={max}
-          step={step}
-          value={value}
+          value={raw}
           onChange={handle}
+          onBlur={handleBlur}
           style={{
             paddingLeft: prefix ? "44px" : undefined,
             paddingRight: suffix ? "80px" : undefined,
