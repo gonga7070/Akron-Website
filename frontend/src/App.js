@@ -908,11 +908,11 @@ function Contact() {
             <div>
               <div className="section-num mb-2">Email</div>
               <a
-                href="mailto:Goncalo@akrondigital.com"
+                href="mailto:contact@akrondigital.com"
                 data-testid="contact-email"
                 className="font-display text-xl md:text-2xl link-underline"
               >
-                Goncalo@akrondigital.com
+                contact@akrondigital.com
               </a>
             </div>
             <div>
@@ -1074,11 +1074,11 @@ function Footer() {
           <div className="lg:col-span-7">
             <div className="section-num mb-6">Akron Digital · GTA Ontario</div>
             <a
-              href="mailto:Goncalo@akrondigital.com"
+              href="mailto:contact@akrondigital.com"
               className="block link-underline font-display text-2xl md:text-3xl"
               data-testid="footer-email"
             >
-              Goncalo@akrondigital.com
+              contact@akrondigital.com
             </a>
             <a
               href="tel:+16477455082"
@@ -1192,7 +1192,7 @@ function ChatWidget() {
         ...m,
         {
           role: "assistant",
-          text: "I couldn't connect. Try emailing Goncalo@akrondigital.com.",
+          text: "I couldn't connect. Try emailing contact@akrondigital.com.",
         },
       ]);
     } finally {
