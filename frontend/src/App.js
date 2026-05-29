@@ -822,16 +822,18 @@ function Contact() {
       "Sent from akrondigital.com",
     ];
     const body = lines.join("\n");
-    const mailto = `mailto:Goncaloc007@gmail.com?subject=${encodeURIComponent(
-      subject,
-    )}&body=${encodeURIComponent(body)}`;
+    const mailto =
+      `https://mail.google.com/mail/?view=cm&fs=1` +
+      `&to=${encodeURIComponent("Goncaloc007@gmail.com")}` +
+      `&su=${encodeURIComponent(subject)}` +
+      `&body=${encodeURIComponent(body)}`;
 
-    window.location.href = mailto;
+    window.open(mailto, "_blank", "noopener,noreferrer");
 
     setTimeout(() => {
       setStatus({
         state: "success",
-        msg: "Your email app should open with the form ready to send.",
+        msg: "Gmail opened in a new tab — just hit send.",
       });
       setForm({
         name: "",
@@ -1006,7 +1008,7 @@ function Contact() {
                     : "text-white/50"
               }`}
             >
-              {status.msg || "Opens your email app pre-filled. You hit send."}
+              {status.msg || "Opens Gmail pre-filled in a new tab. You hit send."}
             </div>
             <button
               data-testid="contact-submit"
