@@ -347,7 +347,6 @@ function PortfolioFrame({ item }) {
   return (
     <div
       ref={wrapRef}
-      onMouseLeave={() => setActive(false)}
       className="relative overflow-hidden border border-white/10 tilt bg-[#0a0a0d] w-full"
     >
       {item.live ? (
