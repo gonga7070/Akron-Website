@@ -368,7 +368,21 @@ function PortfolioFrame({ item }) {
           {!active && (
             <button
               type="button"
-              onClick={() => setActive(true)}
+              onPointerDown={(e) => {
+                e.preventDefault();
+                setActive(true);
+                requestAnimationFrame(() => {
+                  const iframe = wrapRef.current?.querySelector("iframe");
+                  if (iframe) {
+                    try {
+                      iframe.focus();
+                      iframe.contentWindow?.focus();
+                    } catch (err) {
+                      /* noop */
+                    }
+                  }
+                });
+              }}
               data-testid={`portfolio-activate-${item.num}`}
               className="absolute inset-0 z-10 flex items-center justify-center bg-black/0 hover:bg-black/30 transition-colors group/click"
               aria-label="Click to interact with live preview"
