@@ -12,21 +12,17 @@ const PORTFOLIO = [
     num: "01",
     title: "SkyForge Roofing",
     category: "Commercial Roofing · GTA",
-    img: "https://images.unsplash.com/photo-1467232004584-a241de8bcf5d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwzfHx3ZWIlMjBkZXNpZ24lMjBtb2NrdXAlMjBkYXJrfGVufDB8fHx8MTc4MDAxMDk0NHww&ixlib=rb-4.1.0&q=85",
+    img: "/portfolio/skyforge-hero.png",
     href: "/skyforge/",
-    live: true,
+    pack: "Standard",
   },
   {
     num: "02",
-    title: "North Atlas",
-    category: "Boutique Consultancy",
-    img: "https://images.pexels.com/photos/6625655/pexels-photo-6625655.png?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940",
-  },
-  {
-    num: "03",
-    title: "Field Notes",
-    category: "Service-based Brand",
-    img: "https://images.unsplash.com/photo-1707836885254-79b6e3d7b18d?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2NzV8MHwxfHNlYXJjaHwxfHx3ZWIlMjBkZXNpZ24lMjBtb2NrdXAlMjBkYXJrfGVufDB8fHx8MTc4MDAxMDk0NHww&ixlib=rb-4.1.0&q=85",
+    title: "SkyForge Roofing",
+    category: "Commercial Roofing · GTA",
+    img: "/portfolio/skyforge-hero.png",
+    href: "/skyforge/",
+    pack: "Premium",
   },
 ];
 
@@ -262,16 +258,37 @@ function Portfolio() {
           </p>
         </div>
 
-        <div className="space-y-16 md:space-y-24">
-          {PORTFOLIO.map((item, idx) => (
-            <div
+        <div className="grid md:grid-cols-2 gap-10 md:gap-12">
+          {PORTFOLIO.map((item) => (
+            <a
               key={item.num}
+              href={item.href}
+              target="_blank"
+              rel="noopener noreferrer"
               data-testid={`portfolio-item-${item.num}`}
-              className={`group relative ${
-                idx % 2 === 0 ? "mr-auto" : "ml-auto"
-              } max-w-2xl`}
+              className="group block relative"
             >
-              <PortfolioFrame item={item} />
+              <div className="relative overflow-hidden border border-white/10 tilt aspect-[1440/900] bg-[#0a0a0d]">
+                <img
+                  src={item.img}
+                  alt={`${item.pack} build — ${item.title}`}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.02]"
+                />
+                <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors pointer-events-none" />
+
+                <div className="absolute top-0 inset-x-0 flex items-start justify-between px-4 py-3 pointer-events-none">
+                  <span className="section-num text-white/90 drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]">
+                    {item.num} / {item.pack} Build
+                  </span>
+                </div>
+
+                <div className="absolute inset-0 flex items-end justify-center pb-8 opacity-0 group-hover:opacity-100 transition-opacity">
+                  <span className="px-5 py-3 bg-black/80 backdrop-blur-md border border-white/20 text-white text-xs font-mono tracking-widest uppercase">
+                    Visit live site →
+                  </span>
+                </div>
+              </div>
 
               <div className="flex items-end justify-between mt-5">
                 <div>
@@ -282,36 +299,11 @@ function Portfolio() {
                     {item.category}
                   </div>
                 </div>
-                {item.live ? (
-                  <a
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    data-testid={`portfolio-open-${item.num}`}
-                    className="group/cta inline-flex items-center gap-3 text-sm tracking-wide font-medium px-5 py-3 border border-white/20 hover:border-[#3b82f6] hover:text-[#3b82f6] transition-colors"
-                  >
-                    Open Site
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      className="group-hover/cta:translate-x-0.5 group-hover/cta:-translate-y-0.5 transition-transform"
-                    >
-                      <path
-                        d="M7 17L17 7M17 7H8M17 7V16"
-                        stroke="currentColor"
-                        strokeWidth="1.6"
-                      />
-                    </svg>
-                  </a>
-                ) : (
-                  <div className="text-xs font-mono text-white/40 tracking-widest uppercase">
-                    Coming Soon
-                  </div>
-                )}
+                <div className="text-xs font-mono text-[#3b82f6] tracking-widest uppercase">
+                  {item.pack} · ${item.pack === "Premium" ? "799" : "299"}
+                </div>
               </div>
-            </div>
+            </a>
           ))}
         </div>
       </div>
@@ -319,102 +311,6 @@ function Portfolio() {
   );
 }
 
-function PortfolioFrame({ item }) {
-  const wrapRef = useRef(null);
-  const [active, setActive] = useState(false);
-  const DEVICE_W = 1440;
-  const DEVICE_H = 900;
-
-  useEffect(() => {
-    if (!wrapRef.current) return;
-    const el = wrapRef.current;
-    const apply = () => {
-      const w = el.clientWidth;
-      const s = w / DEVICE_W;
-      el.style.setProperty("--frame-scale", s);
-      el.style.height = `${DEVICE_H * s}px`;
-    };
-    apply();
-    const ro = new ResizeObserver(apply);
-    ro.observe(el);
-    window.addEventListener("resize", apply);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("resize", apply);
-    };
-  }, []);
-
-  return (
-    <div
-      ref={wrapRef}
-      className="relative overflow-hidden border border-white/10 tilt bg-[#0a0a0d] w-full"
-    >
-      {item.live ? (
-        <>
-          <iframe
-            title={item.title}
-            src={item.href}
-            loading="lazy"
-            sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
-            style={{
-              width: `${DEVICE_W}px`,
-              height: `${DEVICE_H}px`,
-              transform: "scale(var(--frame-scale, 1))",
-              transformOrigin: "top left",
-              pointerEvents: active ? "auto" : "none",
-            }}
-            className="absolute top-0 left-0 bg-black border-0"
-          />
-          {!active && (
-            <button
-              type="button"
-              onPointerDown={(e) => {
-                e.preventDefault();
-                setActive(true);
-                requestAnimationFrame(() => {
-                  const iframe = wrapRef.current?.querySelector("iframe");
-                  if (iframe) {
-                    try {
-                      iframe.focus();
-                      iframe.contentWindow?.focus();
-                    } catch (err) {
-                      /* noop */
-                    }
-                  }
-                });
-              }}
-              data-testid={`portfolio-activate-${item.num}`}
-              className="absolute inset-0 z-10 flex items-center justify-center bg-black/0 hover:bg-black/30 transition-colors group/click"
-              aria-label="Click to interact with live preview"
-            >
-              <span className="inline-flex items-center px-4 py-2 bg-black/70 backdrop-blur-md border border-white/20 text-white text-xs font-mono tracking-widest uppercase opacity-0 group-hover/click:opacity-100 transition-opacity">
-                Click to scroll
-              </span>
-            </button>
-          )}
-        </>
-      ) : (
-        <div className="aspect-[16/10] relative">
-          <img
-            src={item.img}
-            alt={item.title}
-            className="absolute inset-0 w-full h-full object-cover opacity-60"
-          />
-          <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-black/20 to-transparent pointer-events-none" />
-        </div>
-      )}
-
-      {!item.live && (
-        <div className="absolute top-0 inset-x-0 flex items-start justify-between px-4 py-3 bg-gradient-to-b from-black/80 to-transparent pointer-events-none z-10">
-          <div className="section-num text-white/80">{item.num} / Project</div>
-          <div className="section-num text-white/60 hidden md:block">
-            Coming Soon
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
 /* ============ WEBSITE PACKS ============ */
 function Packs() {
   const packs = [
