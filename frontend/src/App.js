@@ -18,10 +18,10 @@ const PORTFOLIO = [
   },
   {
     num: "02",
-    title: "SkyForge Roofing",
-    category: "Commercial Roofing · GTA",
-    img: "/portfolio/skyforge-hero.png",
-    href: "/skyforge/",
+    title: "Carter Electric",
+    category: "Licensed Electricians",
+    img: "/portfolio/carter-hero.png",
+    href: "/carter/",
     pack: "Premium",
   },
 ];
