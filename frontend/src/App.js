@@ -300,7 +300,7 @@ function Portfolio() {
                   </div>
                 </div>
                 <div className="text-xs font-mono text-[#3b82f6] tracking-widest uppercase">
-                  {item.pack} · ${item.pack === "Premium" ? "799" : "299"}
+                  {item.pack} · ${item.pack === "Premium" ? "500" : "250"}/mo
                 </div>
               </div>
             </a>
@@ -316,9 +316,10 @@ function Packs() {
   const packs = [
     {
       id: "standard",
-      price: "$299",
+      price: "$250",
+      priceSuffix: "/mo",
       name: "Standard",
-      tag: "One-time",
+      tag: "Monthly",
       summary:
         "A focused one-pager that earns trust and books calls. Perfect launch point.",
       features: [
@@ -329,13 +330,17 @@ function Packs() {
         "Contact Information",
         "Contact Form",
         "Mobile-Friendly Design",
+        "Hosting & Domain Management",
+        "Website Updates & Backups",
+        "Priority Support",
       ],
     },
     {
       id: "premium",
-      price: "$799",
+      price: "$500",
+      priceSuffix: "/mo",
       name: "Premium",
-      tag: "One-time · Most Popular",
+      tag: "Monthly · Most Popular",
       summary:
         "A full multi-page site with custom design and SEO. Built to outclass competitors.",
       features: [
@@ -351,27 +356,13 @@ function Packs() {
         "Contact Form",
         "Mobile-Friendly Design",
         "Basic SEO Setup",
-      ],
-      highlighted: true,
-    },
-    {
-      id: "monthly",
-      price: "$75",
-      priceSuffix: "/mo",
-      name: "Monthly Care",
-      tag: "Subscription",
-      summary:
-        "Keep your site sharp, fast and protected. Add live AI chat & Google reviews.",
-      features: [
         "AI Assistant Chat",
         "Live Google Reviews",
-        "Domain Management",
-        "Website Updates",
-        "Security Monitoring",
-        "Website Backups",
         "Analytics Reports",
+        "Hosting, Security & Backups",
         "Priority Support",
       ],
+      highlighted: true,
     },
   ];
 
@@ -390,7 +381,7 @@ function Packs() {
           </h2>
         </div>
 
-        <div className="grid md:grid-cols-3 border border-white/10">
+        <div className="grid md:grid-cols-2 border border-white/10">
           {packs.map((p) => (
             <div
               key={p.id}
@@ -1001,9 +992,8 @@ function Contact() {
                 onChange={(e) => setForm({ ...form, package: e.target.value })}
               >
                 <option value="">Select a pack...</option>
-                <option value="Standard">Standard — $299</option>
-                <option value="Premium">Premium — $799</option>
-                <option value="Monthly Care">Monthly Care — $75/mo</option>
+                <option value="Standard">Standard — $250/mo</option>
+                <option value="Premium">Premium — $500/mo</option>
                 <option value="Not sure yet">Not sure yet</option>
               </select>
             </div>
