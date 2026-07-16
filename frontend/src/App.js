@@ -299,9 +299,6 @@ function Portfolio() {
                     {item.category}
                   </div>
                 </div>
-                <div className="text-xs font-mono text-[#3b82f6] tracking-widest uppercase">
-                  {item.pack} · ${item.pack === "Premium" ? "500" : "250"}/mo
-                </div>
               </div>
             </a>
           ))}
@@ -743,128 +740,6 @@ function About() {
 
 /* ============ CONTACT ============ */
 function Contact() {
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    message: "",
-    package: "",
-    business_name: "",
-    has_website: "",
-  });
-  const [status, setStatus] = useState({ state: "idle", msg: "" });
-
-  useEffect(() => {
-    try {
-      const sel = sessionStorage.getItem("akron_selected_pack");
-      if (sel) setForm((f) => ({ ...f, package: sel }));
-    } catch (e) {
-      /* noop */
-    }
-    const onPick = (e) => {
-      const name = e?.detail || "";
-      if (name) setForm((f) => ({ ...f, package: name }));
-    };
-    window.addEventListener("akron:pack-selected", onPick);
-    return () => window.removeEventListener("akron:pack-selected", onPick);
-  }, []);
-
-  const submit = async (e) => {
-    e.preventDefault();
-    if (!form.name || !form.email) {
-      setStatus({
-        state: "error",
-        msg: "Please fill name and email.",
-      });
-      return;
-    }
-    setStatus({ state: "loading", msg: "Opening your email..." });
-
-    // Save lead silently in DB (best effort)
-    axios.post(`${API}/contact`, form).catch(() => {});
-
-    // Build a genuine, human-sounding email body
-    const sentences = [];
-    const firstName = (form.name || "").trim().split(/\s+/)[0] || form.name;
-
-    let intro = `My name is ${form.name}`;
-    if (form.business_name) intro += ` and I run ${form.business_name}`;
-    intro += ".";
-    sentences.push(intro);
-
-    if (form.has_website === "Yes") {
-      sentences.push("I already have a website but I'm looking to redo it.");
-    } else if (form.has_website === "No") {
-      sentences.push("I don't have a website yet and I'm looking to get one built.");
-    }
-
-    if (form.package) {
-      if (form.package === "Not sure yet") {
-        sentences.push("I'm not sure yet which package fits best — would love your advice.");
-      } else {
-        sentences.push(`I'm interested in your ${form.package} package.`);
-      }
-    }
-
-    let openingPara = sentences.join(" ");
-
-    const messagePara = form.message ? form.message.trim() : "";
-
-    const contactBits = [];
-    contactBits.push(`Email: ${form.email}`);
-    if (form.phone) contactBits.push(`Phone: ${form.phone}`);
-
-    const bodyLines = [
-      "Hi Akron Digital,",
-      "",
-      openingPara,
-    ];
-    if (messagePara) {
-      bodyLines.push("", messagePara);
-    }
-    bodyLines.push(
-      "",
-      "Looking forward to hearing from you.",
-      "",
-      "Thanks,",
-      firstName,
-      "",
-      ...contactBits,
-    );
-
-    const body = bodyLines.join("\n");
-
-    const subject = `Website Form — ${form.business_name || form.name}`;
-    const mailto =
-      `https://mail.google.com/mail/?view=cm` +
-      `&to=${encodeURIComponent("Goncaloc007@gmail.com")}` +
-      `&su=${encodeURIComponent(subject)}` +
-      `&body=${encodeURIComponent(body)}`;
-
-    window.open(mailto, "_blank", "noopener,noreferrer");
-
-    setTimeout(() => {
-      setStatus({
-        state: "success",
-        msg: "Gmail opened in a new tab — just hit send.",
-      });
-      setForm({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-        package: "",
-        business_name: "",
-        has_website: "",
-      });
-      try {
-        sessionStorage.removeItem("akron_selected_pack");
-      } catch (e) {
-        /* noop */
-      }
-    }, 600);
-  };
-
   return (
     <section
       id="contact"
@@ -872,166 +747,81 @@ function Contact() {
       className="relative py-24 md:py-32 bg-black border-t border-white/5"
     >
       <div className="max-w-7xl mx-auto px-6 lg:px-10 grid lg:grid-cols-12 gap-12">
-        <div className="lg:col-span-5">
-          <div className="section-num mb-4">05 / Start a Project</div>
+        <div className="lg:col-span-6">
+          <div className="section-num mb-4">05 / Get In Touch</div>
           <h2 className="font-display font-bold tracking-tighter text-5xl md:text-7xl leading-[0.92]">
-            Let's build <br />
+            Let&apos;s build <br />
             something <br />
             <span className="text-[#3b82f6]">sharp.</span>
           </h2>
+          <p className="text-white/60 mt-8 max-w-md font-body leading-relaxed">
+            Skip the form. Text, call, or shoot us an email — we usually reply
+            within a few hours.
+          </p>
+        </div>
 
-          <div className="mt-12 space-y-6">
-            <div>
-              <div className="section-num mb-2">Email</div>
-              <a
-                href="mailto:contact@akrondigital.com"
-                data-testid="contact-email"
-                className="font-display text-xl md:text-2xl link-underline"
-              >
-                contact@akrondigital.com
-              </a>
-            </div>
-            <div>
-              <div className="section-num mb-2">Phone</div>
-              <a
-                href="tel:+16477455082"
-                data-testid="contact-phone"
-                className="font-display text-xl md:text-2xl link-underline"
-              >
-                647-745-5082
-              </a>
-            </div>
-            <div>
-              <div className="section-num mb-2">Location</div>
-              <div className="font-display text-xl md:text-2xl">
+        <div className="lg:col-span-6 flex flex-col justify-center">
+          <div className="space-y-10">
+            <a
+              href="mailto:contact@akrondigital.com"
+              data-testid="contact-email"
+              className="group block border-t border-white/10 pt-6"
+            >
+              <div className="section-num mb-3">Email</div>
+              <div className="flex items-end justify-between gap-4">
+                <div className="font-display text-2xl md:text-4xl tracking-tight group-hover:text-[#3b82f6] transition-colors">
+                  contact@akrondigital.com
+                </div>
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="text-white/40 group-hover:text-[#3b82f6] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all flex-shrink-0"
+                >
+                  <path
+                    d="M7 17L17 7M17 7H8M17 7V16"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                  />
+                </svg>
+              </div>
+            </a>
+
+            <a
+              href="tel:+16477455082"
+              data-testid="contact-phone"
+              className="group block border-t border-white/10 pt-6"
+            >
+              <div className="section-num mb-3">Phone</div>
+              <div className="flex items-end justify-between gap-4">
+                <div className="font-display text-2xl md:text-4xl tracking-tight group-hover:text-[#3b82f6] transition-colors">
+                  647-745-5082
+                </div>
+                <svg
+                  width="22"
+                  height="22"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  className="text-white/40 group-hover:text-[#3b82f6] group-hover:translate-x-1 group-hover:-translate-y-1 transition-all flex-shrink-0"
+                >
+                  <path
+                    d="M7 17L17 7M17 7H8M17 7V16"
+                    stroke="currentColor"
+                    strokeWidth="1.5"
+                  />
+                </svg>
+              </div>
+            </a>
+
+            <div className="border-t border-white/10 pt-6" data-testid="contact-location">
+              <div className="section-num mb-3">Location</div>
+              <div className="font-display text-2xl md:text-4xl tracking-tight">
                 GTA, Ontario
               </div>
             </div>
           </div>
         </div>
-
-        <form
-          onSubmit={submit}
-          data-testid="contact-form"
-          className="lg:col-span-7 space-y-5"
-        >
-          <div className="grid sm:grid-cols-2 gap-5">
-            <div>
-              <div className="section-num mb-3">Name</div>
-              <input
-                data-testid="contact-name"
-                className="akron-input"
-                value={form.name}
-                onChange={(e) => setForm({ ...form, name: e.target.value })}
-                placeholder="Your full name"
-              />
-            </div>
-            <div>
-              <div className="section-num mb-3">Email</div>
-              <input
-                data-testid="contact-email-input"
-                className="akron-input"
-                type="email"
-                value={form.email}
-                onChange={(e) => setForm({ ...form, email: e.target.value })}
-                placeholder="you@business.com"
-              />
-            </div>
-          </div>
-          <div className="grid sm:grid-cols-2 gap-5">
-            <div>
-              <div className="section-num mb-3">Business Name</div>
-              <input
-                data-testid="contact-business-input"
-                className="akron-input"
-                value={form.business_name}
-                onChange={(e) =>
-                  setForm({ ...form, business_name: e.target.value })
-                }
-                placeholder="e.g. Goncalo Landscaping"
-              />
-            </div>
-            <div>
-              <div className="section-num mb-3">Already Have a Website?</div>
-              <div className="flex gap-3">
-                {["Yes", "No"].map((opt) => (
-                  <button
-                    key={opt}
-                    type="button"
-                    data-testid={`contact-has-website-${opt.toLowerCase()}`}
-                    onClick={() => setForm({ ...form, has_website: opt })}
-                    className={`flex-1 px-5 py-[14px] text-sm font-medium tracking-wide border transition-all ${
-                      form.has_website === opt
-                        ? "btn-primary"
-                        : "bg-[#0a0a0d] border-white/10 text-white/70 hover:border-white/40 hover:text-white"
-                    }`}
-                  >
-                    {opt}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-          <div className="grid sm:grid-cols-2 gap-5">
-            <div>
-              <div className="section-num mb-3">Phone (optional)</div>
-              <input
-                data-testid="contact-phone-input"
-                className="akron-input"
-                value={form.phone}
-                onChange={(e) => setForm({ ...form, phone: e.target.value })}
-                placeholder="(647) 555-0123"
-              />
-            </div>
-            <div>
-              <div className="section-num mb-3">Interested In</div>
-              <select
-                data-testid="contact-package-input"
-                className="akron-input"
-                value={form.package}
-                onChange={(e) => setForm({ ...form, package: e.target.value })}
-              >
-                <option value="">Select a pack...</option>
-                <option value="Standard">Standard — $250/mo</option>
-                <option value="Premium">Premium — $500/mo</option>
-                <option value="Not sure yet">Not sure yet</option>
-              </select>
-            </div>
-          </div>
-          <div>
-            <div className="section-num mb-3">Message (optional)</div>
-            <textarea
-              data-testid="contact-message"
-              rows={6}
-              className="akron-input resize-none"
-              value={form.message}
-              onChange={(e) => setForm({ ...form, message: e.target.value })}
-              placeholder="Tell us about your business and what you need..."
-            />
-          </div>
-          <div className="flex items-center justify-between flex-wrap gap-4 pt-2">
-            <div
-              data-testid="contact-status"
-              className={`font-mono text-xs ${
-                status.state === "success"
-                  ? "text-[#3b82f6]"
-                  : status.state === "error"
-                    ? "text-red-400"
-                    : "text-white/50"
-              }`}
-            >
-              {status.msg || "Opens Gmail pre-filled in a new tab. You hit send."}
-            </div>
-            <button
-              data-testid="contact-submit"
-              type="submit"
-              disabled={status.state === "loading"}
-              className="btn-primary px-8 py-4 text-sm font-medium tracking-wide disabled:opacity-50 disabled:cursor-not-allowed"
-            >
-              {status.state === "loading" ? "Opening..." : "Send Message"}
-            </button>
-          </div>
-        </form>
       </div>
     </section>
   );
