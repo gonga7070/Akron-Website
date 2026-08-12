@@ -313,10 +313,7 @@ function Packs() {
   const packs = [
     {
       id: "standard",
-      price: "$250",
-      priceSuffix: "/mo",
       name: "Standard",
-      tag: "Monthly",
       summary:
         "A focused one-pager that earns trust and books calls. Perfect launch point.",
       features: [
@@ -331,13 +328,13 @@ function Packs() {
         "Website Updates & Backups",
         "Priority Support",
       ],
+      buyPrice: 999,
+      maintPrice: 99,
+      subPrice: 250,
     },
     {
       id: "premium",
-      price: "$500",
-      priceSuffix: "/mo",
       name: "Premium",
-      tag: "Monthly · Most Popular",
       summary:
         "A full multi-page site with custom design and SEO. Built to outclass competitors.",
       features: [
@@ -359,6 +356,9 @@ function Packs() {
         "Hosting, Security & Backups",
         "Priority Support",
       ],
+      buyPrice: 1999,
+      maintPrice: 99,
+      subPrice: 500,
       highlighted: true,
     },
   ];
@@ -374,8 +374,12 @@ function Packs() {
           <div className="section-num mb-4">02 / Website Packs</div>
           <h2 className="font-display font-bold tracking-tighter text-5xl md:text-7xl leading-[0.95]">
             Pick a pack. <br />
-            <span className="text-white/40">We do the rest.</span>
+            <span className="text-white/40">Pick how you pay.</span>
           </h2>
+          <p className="text-white/60 mt-8 max-w-lg font-body leading-relaxed">
+            Two ways to pay for each build — own it outright with light monthly
+            maintenance, or roll it all into a flat monthly subscription.
+          </p>
         </div>
 
         <div className="grid md:grid-cols-2 border border-white/10">
@@ -392,30 +396,67 @@ function Packs() {
               {p.highlighted && (
                 <div className="absolute -top-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#1E3A8A] to-transparent" />
               )}
-              <div className="flex items-center justify-between mb-8">
-                <div className="section-num">{p.tag}</div>
+              <div className="flex items-center justify-between mb-6">
+                <div className="section-num">{p.highlighted ? "Most Popular" : "Starter"}</div>
                 {p.highlighted && (
                   <div className="px-2 py-1 text-[10px] tracking-widest font-mono uppercase border border-[#1E3A8A] text-[#3b82f6]">
                     Popular
                   </div>
                 )}
               </div>
-              <div className="font-display font-bold text-3xl mb-2">
+              <div className="font-display font-bold text-4xl mb-2">
                 {p.name}
-              </div>
-              <div className="flex items-baseline gap-1 mb-6">
-                <span className="font-display font-black text-6xl tracking-tighter">
-                  {p.price}
-                </span>
-                {p.priceSuffix && (
-                  <span className="text-white/50 font-body">
-                    {p.priceSuffix}
-                  </span>
-                )}
               </div>
               <p className="text-white/60 mb-8 font-body leading-relaxed">
                 {p.summary}
               </p>
+
+              {/* PRIMARY: Buy + Maintenance */}
+              <div className="relative border border-white/15 bg-black/40 p-6 mb-4">
+                <div className="absolute -top-3 left-6 px-2 py-0.5 text-[10px] tracking-widest font-mono uppercase bg-black text-[#3b82f6] border border-[#1E3A8A]">
+                  Option 1 · Own it
+                </div>
+                <div className="flex items-baseline gap-2 mb-1 mt-2">
+                  <span className="font-display font-black text-5xl tracking-tighter">
+                    ${p.buyPrice}
+                  </span>
+                  <span className="text-white/50 font-body text-sm">one-time</span>
+                </div>
+                <div className="flex items-baseline gap-2 mb-3">
+                  <span className="text-white/70 font-body">+ ${p.maintPrice}/mo</span>
+                  <span className="text-white/40 font-body text-sm">maintenance</span>
+                </div>
+                <p className="text-white/55 text-sm font-body leading-relaxed">
+                  Pay once for the build. ${p.maintPrice}/mo covers hosting,
+                  updates, security & support.
+                </p>
+              </div>
+
+              {/* OR */}
+              <div className="flex items-center gap-4 mb-4">
+                <div className="flex-1 h-px bg-white/10" />
+                <span className="section-num text-white/40">or</span>
+                <div className="flex-1 h-px bg-white/10" />
+              </div>
+
+              {/* SECONDARY: Subscription */}
+              <div className="border border-white/10 bg-black/20 p-6 mb-8">
+                <div className="absolute-top-hidden mb-2 section-num text-white/50">
+                  Option 2 · Subscribe
+                </div>
+                <div className="flex items-baseline gap-2 mb-3">
+                  <span className="font-display font-black text-5xl tracking-tighter">
+                    ${p.subPrice}
+                  </span>
+                  <span className="text-white/50 font-body">/month</span>
+                </div>
+                <p className="text-white/55 text-sm font-body leading-relaxed">
+                  No upfront. Everything included: build, hosting, updates &
+                  support. Cancel anytime.
+                </p>
+              </div>
+
+              <div className="section-num mb-4">What&apos;s Included</div>
               <ul className="space-y-3 mb-10">
                 {p.features.map((f) => (
                   <li
@@ -430,18 +471,6 @@ function Packs() {
               <a
                 href="#contact"
                 data-testid={`pack-cta-${p.id}`}
-                onClick={() => {
-                  try {
-                    sessionStorage.setItem("akron_selected_pack", p.name);
-                    window.dispatchEvent(
-                      new CustomEvent("akron:pack-selected", {
-                        detail: p.name,
-                      }),
-                    );
-                  } catch (e) {
-                    /* noop */
-                  }
-                }}
                 className={`block w-full text-center px-5 py-3.5 text-sm font-medium tracking-wide transition-all ${
                   p.highlighted
                     ? "btn-primary"
