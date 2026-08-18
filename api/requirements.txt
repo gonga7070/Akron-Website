@@ -1,0 +1,9 @@
+--extra-index-url https://d33sy5i8bnduwe.cloudfront.net/simple/
+
+fastapi==0.110.1
+pydantic[email]>=2.6.4
+python-dotenv>=1.0.1
+motor==3.3.1
+pymongo==4.5.0
+resend>=2.0.0
+emergentintegrations==0.1.2
