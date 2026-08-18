@@ -13,7 +13,8 @@ Python serverless function under `/api/*`.
 ├── vercel.json           ← Vercel build & routing config
 ├── api/
 │   ├── index.py          ← ASGI entry that imports the existing FastAPI app
-│   └── requirements.txt  ← Python deps installed on Vercel
+│   ├── pyproject.toml    ← Python deps (managed by uv on Vercel)
+│   └── uv.lock           ← locked dependency versions (checked in)
 ├── backend/
 │   └── server.py         ← unchanged app (imported by api/index.py)
 ├── frontend/             ← unchanged React app (built with CRA)

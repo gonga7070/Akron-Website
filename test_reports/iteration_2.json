@@ -1,0 +1,25 @@
+{
+  "summary": "Regression check after Vercel deployment files were added (/app/api/pyproject.toml, /app/api/uv.lock, /app/api/index.py, /app/vercel.json). Backend and frontend source code unchanged. Backend: 7/7 pytest tests pass (root, contact POST persists + email_sent=false, invalid email 422, missing required 422, contact GET sorted desc + no _id leak, chat returns Claude reply, chat history persisted chronologically). Frontend: home loads with hero, 2 pack cards (Standard $999+$99/mo OR $250/mo, Premium $1,999+$99/mo OR $500/mo — all keywords present), no <form> elements (contact-form removed as expected), portfolio mentions SkyForge & Carter, chat widget opens, sends 'How much is Premium?' and receives correct Claude reply ('Premium is $1,999 upfront + $99/month for maintenance, or $500/month all-in with no upfront cost.'). Standalone /skyforge/ (HTTP 200, contains SkyForge content) and /carter/ (HTTP 200, contains Carter Electric content) both serve correctly. No console errors. No regressions detected from the Vercel deployment-layer changes.",
+  "backend_issues": {"critical": [], "minor": []},
+  "frontend_issues": {"ui_bugs": [], "integration_issues": [], "design_issues": []},
+  "test_report_links": [
+    "/app/backend/tests/test_akron_backend.py",
+    "/app/test_reports/pytest/pytest_results.xml"
+  ],
+  "action_items": [],
+  "critical_code_review_comments": [
+    "Note (not new): App.js still a single large file (~1250 lines) — recommend splitting when time permits.",
+    "Note (not new): No rate limiting on /api/contact or /api/chat.",
+    "Vercel: /app/api/index.py imports FastAPI app from ../backend/server.py which uses load_dotenv on backend/.env — confirm backend/.env is present in the Vercel deployment (or set the env vars via Vercel dashboard: MONGO_URL, DB_NAME, EMERGENT_LLM_KEY, RESEND_API_KEY, CORS_ORIGINS). Also ensure MongoDB is reachable from Vercel (localhost:27017 in .env won't work in prod)."
+  ],
+  "updated_files": [
+    "/app/backend/tests/test_akron_backend.py (updated chat assertion to match new pricing $999/$1999/$250/$500/$99, and updated missing-required-field test since 'message' is now Optional in ContactRequest — only name+email required)"
+  ],
+  "success_rate": {"backend": "100% (7/7)", "frontend": "100%"},
+  "test_credentials": "N/A - no auth in this app",
+  "seed_data_creation": "A few TEST_-prefixed contact records and one TEST_ chat session were created during pytest. Safe to leave.",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Backend regression suite: pytest /app/backend/tests/test_akron_backend.py -v. Chat assertion now uses a broader keyword list (999/1999/250/500/99/Premium/Standard). Contact schema requires only name+email; message/phone/package/business_name/has_website are all Optional. Contact section on the home page has NO form — only clickable Email/Phone/Location rows.",
+  "rca_of_the_issue": "N/A — regression test only; no bugs found. The two previous pretest failures were stale expectations (old $799 pricing and old required 'message' field), not code regressions — updated the tests to match the current API contract."
+}
