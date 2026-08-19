@@ -989,7 +989,7 @@ function ChatWidget() {
         ...m,
         {
           role: "assistant",
-          text: "I couldn't connect. Try emailing contact@akrondigital.com.",
+          text: "I can't reach the server right now. Text or call Goncalo at 647-745-5082.",
         },
       ]);
     } finally {

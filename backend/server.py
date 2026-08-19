@@ -18,10 +18,10 @@ from emergentintegrations.llm.chat import LlmChat, UserMessage
 ROOT_DIR = Path(__file__).parent
 load_dotenv(ROOT_DIR / '.env')
 
-# MongoDB
-mongo_url = os.environ['MONGO_URL']
-client = AsyncIOMotorClient(mongo_url)
-db = client[os.environ['DB_NAME']]
+# MongoDB (optional at import time — endpoints handle missing gracefully)
+mongo_url = os.environ.get('MONGO_URL', 'mongodb://localhost:27017')
+client = AsyncIOMotorClient(mongo_url, serverSelectionTimeoutMS=3000)
+db = client[os.environ.get('DB_NAME', 'akron_digital')]
 
 # Resend
 RESEND_API_KEY = os.environ.get('RESEND_API_KEY', '').strip()
@@ -200,32 +200,39 @@ async def chat(payload: ChatRequest):
     if not EMERGENT_LLM_KEY:
         raise HTTPException(status_code=500, detail="LLM key not configured")
     session_id = payload.session_id or str(uuid.uuid4())
+
+    # DB history is nice-to-have. Never let it block the LLM response.
     try:
-        # Load recent history (last 20 turns) for context
-        history_docs = await db.chat_messages.find(
+        await db.chat_messages.find(
             {"session_id": session_id}, {"_id": 0}
         ).sort("created_at", 1).to_list(40)
+    except Exception as db_err:
+        logger.warning(f"Chat history read failed (continuing): {db_err}")
 
+    try:
         chat_client = LlmChat(
             api_key=EMERGENT_LLM_KEY,
             session_id=session_id,
             system_message=AKRON_SYSTEM_MESSAGE,
         ).with_model("anthropic", "claude-sonnet-4-5-20250929")
 
-        # Replay prior turns so the model has continuity (LlmChat sessionizes via session_id but we also rely on history docs for our own UI)
-        # Send user message
         user_msg = UserMessage(text=payload.message)
         reply_text = await chat_client.send_message(user_msg)
+    except Exception as llm_err:
+        logger.exception("LLM call failed")
+        raise HTTPException(status_code=502, detail=f"LLM error: {llm_err}")
 
+    # Fire-and-forget persistence
+    try:
         now = datetime.now(timezone.utc).isoformat()
         await db.chat_messages.insert_many([
             {"session_id": session_id, "role": "user", "text": payload.message, "created_at": now},
             {"session_id": session_id, "role": "assistant", "text": str(reply_text), "created_at": now},
         ])
-        return ChatResponse(session_id=session_id, reply=str(reply_text))
-    except Exception as e:
-        logger.exception("Chat error")
-        raise HTTPException(status_code=500, detail=f"Chat failed: {e}")
+    except Exception as db_err:
+        logger.warning(f"Chat history write failed (continuing): {db_err}")
+
+    return ChatResponse(session_id=session_id, reply=str(reply_text))
 
 
 @api_router.get("/chat/{session_id}")
