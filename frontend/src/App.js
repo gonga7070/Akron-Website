@@ -330,7 +330,7 @@ function Packs() {
       ],
       buyPrice: 999,
       maintPrice: 99,
-      subPrice: 250,
+      subPrice: 199,
     },
     {
       id: "premium",
@@ -356,9 +356,9 @@ function Packs() {
         "Hosting, Security & Backups",
         "Priority Support",
       ],
-      buyPrice: 1999,
+      buyPrice: 2999,
       maintPrice: 99,
-      subPrice: 500,
+      subPrice: 499,
       highlighted: true,
     },
   ];
@@ -378,7 +378,8 @@ function Packs() {
           </h2>
           <p className="text-white/60 mt-8 max-w-lg font-body leading-relaxed">
             Two ways to pay for each build — own it outright with light monthly
-            maintenance, or roll it all into a flat monthly subscription.
+            maintenance, or lease it and we handle hosting and the domain on
+            your behalf.
           </p>
         </div>
 
@@ -439,10 +440,10 @@ function Packs() {
                 <div className="flex-1 h-px bg-white/10" />
               </div>
 
-              {/* SECONDARY: Subscription */}
+              {/* SECONDARY: Lease */}
               <div className="border border-white/10 bg-black/20 p-6 mb-8">
                 <div className="absolute-top-hidden mb-2 section-num text-white/50">
-                  Option 2 · Subscribe
+                  Option 2 · Lease it
                 </div>
                 <div className="flex items-baseline gap-2 mb-3">
                   <span className="font-display font-black text-5xl tracking-tighter">
@@ -451,8 +452,9 @@ function Packs() {
                   <span className="text-white/50 font-body">/month</span>
                 </div>
                 <p className="text-white/55 text-sm font-body leading-relaxed">
-                  No upfront. Everything included: build, updates & support.
-                  Cancel anytime.
+                  No upfront. We host the site and hold the domain on your
+                  behalf. Includes maintenance & support. Cancel anytime — the
+                  site stays with us.
                 </p>
               </div>
 

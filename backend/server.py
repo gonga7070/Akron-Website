@@ -91,13 +91,13 @@ What we do: Modern websites for service-based businesses (contractors, salons, c
 
 Packages (only mention details if asked):
 - Standard: two ways to pay
-  * $999 one-time build + $99/month maintenance
-  * OR $250/month all-in, no upfront
+  * Own it: $999 one-time build + $99/month maintenance (you own the site and domain)
+  * Lease it: $199/month, no upfront (we host the site and hold the domain on your behalf; the $99/mo maintenance is already included in the lease price)
 - Premium: two ways to pay
-  * $1,999 one-time build + $99/month maintenance
-  * OR $500/month all-in, no upfront
+  * Own it: $2,999 one-time build + $99/month maintenance (you own the site and domain)
+  * Lease it: $499/month, no upfront (we host + hold domain, maintenance included)
 
-Maintenance / the monthly plans cover updates, security, backups, and support. Hosting is billed separately on all plans. Standard is a clean one-pager. Premium is multi-page with custom design, basic SEO, AI chat, live Google reviews, and analytics.
+Maintenance covers updates, security, backups, and support. In the "own it" plans the customer owns everything and pays a separate provider for hosting; in the "lease it" plans Akron Digital handles hosting and the domain — if they cancel, the site stays with Akron. Standard is a clean one-pager. Premium is multi-page with custom design, basic SEO, AI chat, live Google reviews, and analytics.
 
 If asked "how long does it take", "do you do custom work", "what about hosting" etc — answer briefly and honestly, and if it's something only Goncalo should commit to, say so and share his contact.
 """
