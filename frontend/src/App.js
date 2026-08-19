@@ -427,8 +427,8 @@ function Packs() {
                   <span className="text-white/40 font-body text-sm">maintenance</span>
                 </div>
                 <p className="text-white/55 text-sm font-body leading-relaxed">
-                  Pay once for the build. ${p.maintPrice}/mo covers hosting,
-                  updates, security & support.
+                  Pay once for the build. ${p.maintPrice}/mo covers updates,
+                  security & support.
                 </p>
               </div>
 
@@ -444,18 +444,15 @@ function Packs() {
                 <div className="absolute-top-hidden mb-2 section-num text-white/50">
                   Option 2 · Subscribe
                 </div>
-                <div className="flex items-baseline gap-2 mb-1">
+                <div className="flex items-baseline gap-2 mb-3">
                   <span className="font-display font-black text-5xl tracking-tighter">
                     ${p.subPrice}
                   </span>
                   <span className="text-white/50 font-body">/month</span>
                 </div>
-                <div className="mb-3 text-[11px] font-mono tracking-widest uppercase text-amber-400/80">
-                  Hosting not included
-                </div>
                 <p className="text-white/55 text-sm font-body leading-relaxed">
-                  No upfront cost. Build, updates & support included.
-                  Hosting is billed separately by your provider. Cancel anytime.
+                  No upfront. Everything included: build, updates & support.
+                  Cancel anytime.
                 </p>
               </div>
 
