@@ -97,7 +97,7 @@ Packages (only mention details if asked):
   * $1,999 one-time build + $99/month maintenance
   * OR $500/month all-in, no upfront
 
-Maintenance / the monthly plans cover hosting, updates, security, backups, and support. Standard is a clean one-pager. Premium is multi-page with custom design, basic SEO, AI chat, live Google reviews, and analytics.
+Maintenance / the monthly plans cover updates, security, backups, and support. Hosting is billed separately on all plans. Standard is a clean one-pager. Premium is multi-page with custom design, basic SEO, AI chat, live Google reviews, and analytics.
 
 If asked "how long does it take", "do you do custom work", "what about hosting" etc — answer briefly and honestly, and if it's something only Goncalo should commit to, say so and share his contact.
 """

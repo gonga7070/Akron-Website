@@ -451,8 +451,8 @@ function Packs() {
                   <span className="text-white/50 font-body">/month</span>
                 </div>
                 <p className="text-white/55 text-sm font-body leading-relaxed">
-                  No upfront. Everything included: build, hosting, updates &
-                  support. Cancel anytime.
+                  No upfront. Everything included: build, updates & support.
+                  Cancel anytime. Hosting billed separately.
                 </p>
               </div>
 
