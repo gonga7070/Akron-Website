@@ -428,7 +428,8 @@ function Packs() {
                   <span className="text-white/40 font-body text-sm">maintenance</span>
                 </div>
                 <p className="text-white/55 text-sm font-body leading-relaxed">
-                  Pay once for the build. ${p.maintPrice}/mo covers updates,
+                  Pay once and the website is yours — code, domain, everything.
+                  We just maintain it: ${p.maintPrice}/mo covers updates,
                   security & support.
                 </p>
               </div>
