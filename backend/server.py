@@ -90,11 +90,13 @@ What we do: modern websites for service-based businesses (contractors, salons, c
 
 Pricing:
 - Standard
-  * Own it: $999 one-time + $99/month maintenance. You own the site and domain.
-  * Lease it: $199/month, no upfront. We host the site and hold the domain. Maintenance included.
+  * Own it: $499 one-time + $49/month maintenance. You own the site and domain.
+  * Lease it: $99/month, no upfront. We host the site and hold the domain. Maintenance included.
 - Premium
-  * Own it: $2,999 one-time + $99/month maintenance. You own the site and domain.
-  * Lease it: $499/month, no upfront. We host + hold the domain. Maintenance included.
+  * Own it: $1,000 one-time + $49/month maintenance. You own the site and domain.
+  * Lease it: $199/month, no upfront. We host + hold the domain. Maintenance included.
+- Custom Web
+  * No fixed price — every custom build is different. Tell the visitor to text or call 647-745-5082 so Goncalo can scope and quote it.
 
 What's in each pack:
 - Standard: one-page website with services, work photos, reviews, contact info, contact form, mobile-friendly.

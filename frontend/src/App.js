@@ -328,9 +328,9 @@ function Packs() {
         "Website Updates & Backups",
         "Priority Support",
       ],
-      buyPrice: 999,
-      maintPrice: 99,
-      subPrice: 199,
+      buyPrice: 499,
+      maintPrice: 49,
+      subPrice: 99,
     },
     {
       id: "premium",
@@ -356,10 +356,26 @@ function Packs() {
         "Hosting, Security & Backups",
         "Priority Support",
       ],
-      buyPrice: 2999,
-      maintPrice: 99,
-      subPrice: 499,
+      buyPrice: 1000,
+      maintPrice: 49,
+      subPrice: 199,
       highlighted: true,
+    },
+    {
+      id: "custom",
+      name: "Custom Web",
+      summary:
+        "Bigger scope, unusual requests, integrations, custom features. We scope and quote it together.",
+      features: [
+        "Everything in Premium",
+        "Custom Functionality",
+        "Third-party Integrations",
+        "Bookings, Payments, Portals",
+        "Multi-language / Localization",
+        "Bespoke Animations",
+        "Priority Support",
+      ],
+      custom: true,
     },
   ];
 
@@ -383,7 +399,7 @@ function Packs() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 border border-white/10">
+        <div className="grid md:grid-cols-3 border border-white/10">
           {packs.map((p) => (
             <div
               key={p.id}
@@ -398,10 +414,21 @@ function Packs() {
                 <div className="absolute -top-px left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#1E3A8A] to-transparent" />
               )}
               <div className="flex items-center justify-between mb-6">
-                <div className="section-num">{p.highlighted ? "Most Popular" : "Starter"}</div>
+                <div className="section-num">
+                  {p.custom
+                    ? "Bespoke"
+                    : p.highlighted
+                      ? "Most Popular"
+                      : "Starter"}
+                </div>
                 {p.highlighted && (
                   <div className="px-2 py-1 text-[10px] tracking-widest font-mono uppercase border border-[#1E3A8A] text-[#3b82f6]">
                     Popular
+                  </div>
+                )}
+                {p.custom && (
+                  <div className="px-2 py-1 text-[10px] tracking-widest font-mono uppercase border border-white/20 text-white/60">
+                    Custom
                   </div>
                 )}
               </div>
@@ -412,52 +439,74 @@ function Packs() {
                 {p.summary}
               </p>
 
-              {/* PRIMARY: Buy + Maintenance */}
-              <div className="relative border border-white/15 bg-black/40 p-6 mb-4">
-                <div className="absolute -top-3 left-6 px-2 py-0.5 text-[10px] tracking-widest font-mono uppercase bg-black text-[#3b82f6] border border-[#1E3A8A]">
-                  Option 1 · Own it
+              {p.custom ? (
+                <div className="border border-white/15 bg-black/40 p-6 mb-8">
+                  <div className="mb-2 section-num text-white/50">Pricing</div>
+                  <div className="font-display font-black text-5xl tracking-tighter mb-3">
+                    Let&apos;s talk
+                  </div>
+                  <p className="text-white/55 text-sm font-body leading-relaxed">
+                    Every custom build is different. Text or call to describe
+                    what you need — we&apos;ll scope it and quote you within a
+                    day.
+                  </p>
                 </div>
-                <div className="flex items-baseline gap-2 mb-1 mt-2">
-                  <span className="font-display font-black text-5xl tracking-tighter">
-                    ${p.buyPrice}
-                  </span>
-                  <span className="text-white/50 font-body text-sm">one-time</span>
-                </div>
-                <div className="flex items-baseline gap-2 mb-3">
-                  <span className="text-white/70 font-body">+ ${p.maintPrice}/mo</span>
-                  <span className="text-white/40 font-body text-sm">maintenance</span>
-                </div>
-                <p className="text-white/55 text-sm font-body leading-relaxed">
-                  Pay once and the website is yours — code, domain, everything.
-                  We just maintain it: ${p.maintPrice}/mo covers updates,
-                  security & support.
-                </p>
-              </div>
+              ) : (
+                <>
+                  {/* PRIMARY: Buy + Maintenance */}
+                  <div className="relative border border-white/15 bg-black/40 p-6 mb-4">
+                    <div className="absolute -top-3 left-6 px-2 py-0.5 text-[10px] tracking-widest font-mono uppercase bg-black text-[#3b82f6] border border-[#1E3A8A]">
+                      Option 1 · Own it
+                    </div>
+                    <div className="flex items-baseline gap-2 mb-1 mt-2">
+                      <span className="font-display font-black text-5xl tracking-tighter">
+                        ${p.buyPrice}
+                      </span>
+                      <span className="text-white/50 font-body text-sm">
+                        one-time
+                      </span>
+                    </div>
+                    <div className="flex items-baseline gap-2 mb-3">
+                      <span className="text-white/70 font-body">
+                        + ${p.maintPrice}/mo
+                      </span>
+                      <span className="text-white/40 font-body text-sm">
+                        maintenance
+                      </span>
+                    </div>
+                    <p className="text-white/55 text-sm font-body leading-relaxed">
+                      Pay once and the website is yours — code, domain,
+                      everything. We just maintain it: ${p.maintPrice}/mo
+                      covers updates, security & support.
+                    </p>
+                  </div>
 
-              {/* OR */}
-              <div className="flex items-center gap-4 mb-4">
-                <div className="flex-1 h-px bg-white/10" />
-                <span className="section-num text-white/40">or</span>
-                <div className="flex-1 h-px bg-white/10" />
-              </div>
+                  {/* OR */}
+                  <div className="flex items-center gap-4 mb-4">
+                    <div className="flex-1 h-px bg-white/10" />
+                    <span className="section-num text-white/40">or</span>
+                    <div className="flex-1 h-px bg-white/10" />
+                  </div>
 
-              {/* SECONDARY: Lease */}
-              <div className="border border-white/10 bg-black/20 p-6 mb-8">
-                <div className="absolute-top-hidden mb-2 section-num text-white/50">
-                  Option 2 · Lease it
-                </div>
-                <div className="flex items-baseline gap-2 mb-3">
-                  <span className="font-display font-black text-5xl tracking-tighter">
-                    ${p.subPrice}
-                  </span>
-                  <span className="text-white/50 font-body">/month</span>
-                </div>
-                <p className="text-white/55 text-sm font-body leading-relaxed">
-                  No upfront. We host the site and hold the domain on your
-                  behalf. Includes maintenance & support. Cancel anytime — the
-                  site stays with us.
-                </p>
-              </div>
+                  {/* SECONDARY: Lease */}
+                  <div className="border border-white/10 bg-black/20 p-6 mb-8">
+                    <div className="absolute-top-hidden mb-2 section-num text-white/50">
+                      Option 2 · Lease it
+                    </div>
+                    <div className="flex items-baseline gap-2 mb-3">
+                      <span className="font-display font-black text-5xl tracking-tighter">
+                        ${p.subPrice}
+                      </span>
+                      <span className="text-white/50 font-body">/month</span>
+                    </div>
+                    <p className="text-white/55 text-sm font-body leading-relaxed">
+                      No upfront. We host the site and hold the domain on your
+                      behalf. Includes maintenance & support. Cancel anytime —
+                      the site stays with us.
+                    </p>
+                  </div>
+                </>
+              )}
 
               <div className="section-num mb-4">What&apos;s Included</div>
               <ul className="space-y-3 mb-10">
@@ -480,7 +529,7 @@ function Packs() {
                     : "btn-ghost hover:border-white/70"
                 }`}
               >
-                Get {p.name}
+                {p.custom ? "Get in touch" : `Get ${p.name}`}
               </a>
             </div>
           ))}
