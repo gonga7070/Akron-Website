@@ -356,7 +356,7 @@ function Packs() {
         "Hosting, Security & Backups",
         "Priority Support",
       ],
-      buyPrice: 1000,
+      buyPrice: 999,
       maintPrice: 49,
       subPrice: 199,
       highlighted: true,
