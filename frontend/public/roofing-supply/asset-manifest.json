@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/roofing-supply/static/css/main.b7e02312.css",
-    "main.js": "/roofing-supply/static/js/main.836b2370.js",
+    "main.js": "/roofing-supply/static/js/main.5f29473a.js",
     "index.html": "/roofing-supply/index.html",
     "main.b7e02312.css.map": "/roofing-supply/static/css/main.b7e02312.css.map",
-    "main.836b2370.js.map": "/roofing-supply/static/js/main.836b2370.js.map"
+    "main.5f29473a.js.map": "/roofing-supply/static/js/main.5f29473a.js.map"
   },
   "entrypoints": [
     "static/css/main.b7e02312.css",
-    "static/js/main.836b2370.js"
+    "static/js/main.5f29473a.js"
   ]
 }
