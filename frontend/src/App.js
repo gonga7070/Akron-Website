@@ -277,12 +277,6 @@ function Portfolio() {
                 />
                 <div className="absolute inset-0 bg-black/10 group-hover:bg-black/0 transition-colors pointer-events-none" />
 
-                <div className="absolute top-0 inset-x-0 flex items-start justify-between px-4 py-3 pointer-events-none">
-                  <span className="section-num text-white/90 drop-shadow-[0_1px_4px_rgba(0,0,0,0.6)]">
-                    {item.num} / {item.pack} Build
-                  </span>
-                </div>
-
                 <div className="absolute inset-0 flex items-end justify-center pb-8 opacity-0 group-hover:opacity-100 transition-opacity">
                   <span className="px-5 py-3 bg-black/80 backdrop-blur-md border border-white/20 text-white text-xs font-mono tracking-widest uppercase">
                     Visit live site →
