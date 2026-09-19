@@ -10,8 +10,8 @@ const HERO_BG =
 const PORTFOLIO = [
   {
     num: "01",
-    title: "Roofing Supply",
-    category: "Wholesale Roofing Materials",
+    title: "Forgeline Metals",
+    category: "Commercial Roofing Fabrications",
     img: "/portfolio/roofing-supply-hero.png",
     href: "/roofing-supply/",
     pack: "Standard",
