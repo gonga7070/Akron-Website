@@ -10,10 +10,10 @@ const HERO_BG =
 const PORTFOLIO = [
   {
     num: "01",
-    title: "SkyForge Roofing",
-    category: "Commercial Roofing · GTA",
-    img: "/portfolio/skyforge-hero.png",
-    href: "/skyforge/",
+    title: "Roofing Supply",
+    category: "Wholesale Roofing Materials",
+    img: "/portfolio/roofing-supply-hero.png",
+    href: "/roofing-supply/",
     pack: "Standard",
   },
   {
